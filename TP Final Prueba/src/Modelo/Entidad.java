@@ -1,13 +1,22 @@
-public class John {
+package Modelo;
+
+public class Entidad {
 
     private String nombre;
     private String apellido;
+    private int puntosDeVida;
 
 
-    public John(String nombre, String apellido) {
+
+    public Entidad(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.puntosDeVida = 0;
     }
+
+    public int getPuntosDeVida() {return puntosDeVida;}
+
+    public void setPuntosDeVida(int puntosDeVida) {this.puntosDeVida = puntosDeVida;}
 
     public String getNombre() {
         return nombre;
