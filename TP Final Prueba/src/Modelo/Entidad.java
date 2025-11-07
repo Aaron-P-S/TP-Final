@@ -6,13 +6,14 @@ public class Entidad {
     private String apellido;
     private int puntosDeVidaActual;
     private int puntosDeVidaMaxima;
+    private boolean vivoOMuerto;
 
 
-    public Entidad(String nombre, String apellido) {
+    public Entidad(String nombre) {
         this.nombre = nombre;
-        this.apellido = apellido;
         this.puntosDeVidaMaxima = 0;
         this.puntosDeVidaActual = 0;
+        this.vivoOMuerto = true;
     }
 
     public int getPuntosDeVidaActual() { return puntosDeVidaActual; }
@@ -27,19 +28,20 @@ public class Entidad {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
     public int getPuntosDeVidaMaxima() {
         return puntosDeVidaMaxima;
     }
 
     public void setPuntosDeVidaMaxima(int puntosDeVidaMaxima) {
         this.puntosDeVidaMaxima = puntosDeVidaMaxima;
+
+    }
+
+    public boolean isVivoOMuerto() {
+        return vivoOMuerto;
+    }
+
+    public void setVivoOMuerto(boolean vivoOMuerto) {
+        this.vivoOMuerto = vivoOMuerto;
     }
 }
