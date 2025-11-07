@@ -1,5 +1,7 @@
 package Interfaces;
 
-public interface Jsonable {
+import org.json.JSONObject;
 
+public interface Jsonable {
+    public JSONObject toJson();
 }

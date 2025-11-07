@@ -3,5 +3,10 @@
 public class Main {
     public static void main(String[] args) {
 
+        //Hardcodeos se toman del archivo json
+
+        //llamamos a las clases
+
+
     }
 }

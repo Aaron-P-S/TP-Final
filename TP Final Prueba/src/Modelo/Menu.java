@@ -2,9 +2,9 @@ package Modelo;
 
 import java.util.Scanner;
 
-public class Gestora {
+public class Menu {
     //Coleccion donde guardamos las diferentes partidas
-
+    Partida partida;
     //Metodos para ejecutar el juego
     public void menu() {
         Scanner sc = new Scanner(System.in);
