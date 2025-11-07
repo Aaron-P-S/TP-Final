@@ -8,9 +8,8 @@ public class Entidad {
     private int puntosDeVidaMaxima;
 
 
-    public Entidad(String nombre, String apellido) {
+    public Entidad(String nombre) {
         this.nombre = nombre;
-        this.apellido = apellido;
         this.puntosDeVidaMaxima = 0;
         this.puntosDeVidaActual = 0;
     }
@@ -25,14 +24,6 @@ public class Entidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public int getPuntosDeVidaMaxima() {

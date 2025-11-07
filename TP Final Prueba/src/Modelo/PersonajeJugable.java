@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class PersonajeJugable extends Entidad {
     E_Clases clases;
     Inventario inventario;
-    public PersonajeJugable(String nombre, String apellido, E_Clases clase) {
-        super(nombre, apellido);
+    public PersonajeJugable(String nombre, E_Clases clase) {
+        super(nombre);
         this.clases = clase;
         this.inventario = new Inventario();
     }
@@ -16,4 +16,6 @@ public class PersonajeJugable extends Entidad {
     public E_Clases getClases() {
         return clases;
     }
+
+
 }
