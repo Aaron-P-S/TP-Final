@@ -4,7 +4,7 @@ import Interfaces.Jsonable;
 
 import java.util.HashMap;
 
-public class Enemigo extends Entidad implements Jsonable {
+public class Enemigo extends Entidad {
 
     int nivel;
 
