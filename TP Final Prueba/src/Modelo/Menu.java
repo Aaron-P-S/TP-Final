@@ -55,6 +55,61 @@ public class Menu {
                     eleccion = 0;
                     break;
                 case 2:
+                    //tienda
+                    /// menu tienda
+                    String nombre = "";
+                    String nombreObjeto = "";
+                    int flag=0;
+                    do {
+
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("Bienvenido a la tienda!");
+                        System.out.println(partida.inventarioTienda.mostrarInventario().toString());
+                        System.out.println("DINERO DISPONIBLE = $$$" + partida.getDineroDisponible());
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("Ingrese a quien desea comprar el item");
+                        System.out.println("1-> Pedro | 2-> Aaron");
+                        switch (sc.nextInt()){
+                            case 1:
+                                    nombre = "Pedro";
+                                break;
+                            case 2:
+                                    nombre = "Aaron";
+                                break;
+                            default:
+                                System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                sc.nextLine();
+                                break;
+                        }
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("Ingrese el nombre del item que desea comprar");
+                        System.out.println("1- Pocion de vida | 2- Espada Larga");
+                        switch (sc.nextInt()){
+                            case 1:
+                                nombreObjeto = "Pocion de Vida";
+                                break;
+                            case 2:
+                                nombreObjeto = "Espada Larga";
+                                break;
+                            default:
+                                System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                sc.nextLine();
+                                break;
+                        }
+
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("¡¡Compra realizada!!");
+                        partida.setDineroDisponible(partida.inventarioTienda.comprarItem(partida.getPersonajeJugable(nombre), nombreObjeto, partida.getDineroDisponible()));
+                        System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("Inventario de: "+nombre);
+                        System.out.println(partida.getPersonajeJugable(nombre).mostrarInventario());
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("Desea volver a la tienda?");
+                        System.out.println("1- Si | 2- No");
+                        flag= sc.nextInt();
+                   }while(flag == 1);
+                    eleccion = 0;
                     break;
                 case 3:
                     //guardar los datos antes de salir
