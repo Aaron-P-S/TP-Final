@@ -15,7 +15,9 @@ public class Partida {
     }
 
     public Partida(){
-
+this.inventarioTienda = new Inventario();
+this.party = new ArrayList<>();
+this.enemigos = new ArrayList<>();
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable){
@@ -46,6 +48,15 @@ public class Partida {
         return enemigosString;
     }
 
+    public boolean estadoParty(){
+        boolean estado = false;
+        for (PersonajeJugable pj : party) {
+            if(pj.isVivoOMuerto()){
+                return true;
+            }
+        }
+        return estado;
+    }
 
 }
 
