@@ -28,7 +28,11 @@ public class Enemigo extends Entidad {
                 "} " + super.toString();
     }
 
-
+public int atacar(PersonajeJugable pj, int nivel){
+        int danoHecho=((int) (50 * (1 + 0.25 * nivel)));
+        pj.setPuntosDeVidaActual(pj.getPuntosDeVidaActual() - danoHecho);
+        return danoHecho;
+}
 
 
 

@@ -3,7 +3,6 @@ package Modelo;
 public class Entidad {
 
     private String nombre;
-    private String apellido;
     private int puntosDeVidaActual;
     private int puntosDeVidaMaxima;
     private boolean vivoOMuerto;
@@ -18,7 +17,14 @@ public class Entidad {
 
     public int getPuntosDeVidaActual() { return puntosDeVidaActual; }
 
-    public void setPuntosDeVidaActual(int puntosDeVida) { this.puntosDeVidaActual = puntosDeVida; }
+    public void setPuntosDeVidaActual(int puntosDeVida) {
+        if(puntosDeVida > 0) {
+            this.puntosDeVidaActual = puntosDeVida;
+        }else {
+            setVivoOMuerto(false);
+            puntosDeVidaActual = 0;
+        }
+         }
 
     public String getNombre() {
         return nombre;
@@ -34,7 +40,7 @@ public class Entidad {
 
     public void setPuntosDeVidaMaxima(int puntosDeVidaMaxima) {
         this.puntosDeVidaMaxima = puntosDeVidaMaxima;
-
+        setPuntosDeVidaActual(puntosDeVidaMaxima);
     }
 
     public boolean isVivoOMuerto() {
@@ -43,5 +49,15 @@ public class Entidad {
 
     public void setVivoOMuerto(boolean vivoOMuerto) {
         this.vivoOMuerto = vivoOMuerto;
+    }
+
+    @Override
+    public String toString() {
+        return "Entidad{" +
+                ", nombre='" + nombre + '\'' +
+                ", puntosDeVidaActual=" + puntosDeVidaActual +
+                ", puntosDeVidaMaxima=" + puntosDeVidaMaxima +
+                ", vivoOMuerto=" + vivoOMuerto +
+                '}';
     }
 }

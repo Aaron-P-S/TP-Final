@@ -1,10 +1,22 @@
 package Modelo;
 
+import Excepciones.NumeroNoValidoException;
+import Excepciones.TodosLosMiembrosMuertosException;
+
+import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
     //Coleccion donde guardamos las diferentes partidas
-    Partida partida;
+    //cambiar a private
+    public Partida partida;
+    public int nivel = 0;
+
+    public Menu(Partida partida) {
+        this.partida = partida;
+    }
+
     //Metodos para ejecutar el juego
     public void menu() {
         Scanner sc = new Scanner(System.in);
@@ -18,10 +30,29 @@ public class Menu {
                             "1. Empezar pelea:" +
                             "2. Visitar la tienda" +
                             "3. Salir");
-                    eleccion = sc.nextInt();
-                    sc.nextLine();
+                    try {
+                        eleccion = sc.nextInt();
+                        sc.nextLine();
+                    } catch (InputMismatchException e) {
+                        System.out.println("No se ingreso un numero, intentelo de nuevo");
+                        eleccion = 0;
+                        sc.nextLine();
+                    }
                     break;
                 case 1:
+                    try {
+                        if (combate()) {
+                            System.out.println("Felicidades, a ganado el combate numero " + (nivel + 1));
+                        } else {
+                            throw new TodosLosMiembrosMuertosException("Han muerto todos los miembros de la party");
+                        }
+                        nivel++;
+                    } catch (TodosLosMiembrosMuertosException e) {
+                        System.out.println(e.getMessage());
+                        eleccion = 3;
+                        break;
+                    }
+                    eleccion = 0;
                     break;
                 case 2:
                     break;
@@ -34,6 +65,72 @@ public class Menu {
                     break;
             }
         }
+    }
+
+    public boolean combate() {
+        int eleccionCombate = 0;
+        int turno = 0;
+        Scanner sc = new Scanner(System.in);
+        while (partida.estadoParty() && partida.enemigos.get(nivel).isVivoOMuerto()) {
+            switch (eleccionCombate) {
+                case 0:
+                    System.out.println("Ingrese un numero segun la accion que quiera realizar en el combate:" +
+                            "1. atacar" +
+                            "2. salir");
+                    try {
+                        eleccionCombate = sc.nextInt();
+                        sc.nextLine();
+                    } catch (InputMismatchException e) {
+                        System.out.println("No se ingreso un numero, intentelo de nuevo");
+                        eleccionCombate = 0;
+                        sc.nextLine();
+                    }
+                    break;
+                case 1:
+                    //atacar
+                    if (turno + 1 > partida.party.size()) {
+                        int numeroRandom = (int) (Math.random() * 101);
+                        int eleccionEnemigo = 0;
+                        System.out.println(numeroRandom);
+                        if (numeroRandom < 25) {
+                            eleccionEnemigo = 0;
+                        } else if (numeroRandom < 50) {
+                            eleccionEnemigo = 1;
+                        } else if (numeroRandom < 75) {
+                            eleccionEnemigo = 2;
+                        } else if (numeroRandom < 100) {
+                            eleccionEnemigo = 3;
+                        }
+                        if (!partida.party.get(eleccionEnemigo).isVivoOMuerto()) {
+                            while(!partida.party.get(eleccionEnemigo).isVivoOMuerto()) {
+                                if (eleccionEnemigo > partida.party.size()) eleccionEnemigo++;
+                                else eleccionEnemigo--;
+                            }
+
+                        }
+                        int danoHecho = partida.enemigos.get(nivel).atacar(partida.party.get(eleccionEnemigo), nivel);
+                        System.out.println(partida.enemigos.get(nivel).getNombre() + " ataco a " + partida.party.get(eleccionEnemigo).getNombre() + " por " + danoHecho + " de dano");
+                        System.out.println( "La vida actual de "+ partida.party.get(eleccionEnemigo).getNombre() +" es "+ partida.party.get(eleccionEnemigo).getPuntosDeVidaActual());
+                        turno = 0;
+                    }
+                    if (!partida.party.get(turno).isVivoOMuerto()) {
+                        System.out.println(partida.party.get(turno).getNombre() + " esta muerto, se salteara su turno");
+                        turno++;
+                    } else {
+                        int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
+                        System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque);
+                        System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " puntos de vida restantes");
+
+                        turno++;
+
+                    }
+                    eleccionCombate = 0;
+                    break;
+                default:
+                    throw new NumeroNoValidoException("Se escogio un numero no valido, intentelo de nuevo");
+            }
+        }
+        return partida.estadoParty();
     }
 
 }
