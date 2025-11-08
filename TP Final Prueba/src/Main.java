@@ -1,8 +1,5 @@
 import Enumeradores.E_Clases;
-import Modelo.Enemigo;
-import Modelo.Menu;
-import Modelo.Partida;
-import Modelo.PersonajeJugable;
+import Modelo.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -19,16 +16,37 @@ public class Main {
         System.out.println(goblin);
         Enemigo jefeGoblin= new Enemigo("Goblin Jefe",1);
         System.out.println(jefeGoblin);
+
+
+
+
+        //inventarios pjs
+        Item itemPJ1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 0, true, 50);
+        Item itemPJ2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 20, 0, false, 60);
+
+        personajeJugable.agregarInventario("Pocion de Vida", itemPJ1);
+        personajeJugable.agregarInventario("Espada Larga", itemPJ2);
+
+        personajeJugable1.agregarInventario("Pocion de Vida", itemPJ1);
+        personajeJugable1.agregarInventario("Espada Larga", itemPJ2);
+
+        //tienda
+        Inventario inventarioTienda = new Inventario();
+        Item item1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 2, true, 50);
+
+        inventarioTienda.agregarItem("Pocion de Vida",item1);
+        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 20, 2, false, 60);
+        inventarioTienda.agregarItem("Espada Larga",item2);
+
+        //llamamos a las clases
         Partida partida =new Partida();
+        partida.agregarTienda(inventarioTienda);
         partida.agregarPersonajeJugable(personajeJugable);
         partida.agregarPersonajeJugable(personajeJugable1);
         partida.agregarEnemigo(goblin);
         partida.agregarEnemigo(jefeGoblin);
         Menu menu = new Menu(partida);
         menu.menu();
-
-        //llamamos a las clases
-
 
     }
 }

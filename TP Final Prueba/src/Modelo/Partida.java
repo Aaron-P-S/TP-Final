@@ -7,11 +7,14 @@ public class Partida {
     Inventario inventarioTienda;
     ArrayList<PersonajeJugable> party;
     ArrayList<Enemigo> enemigos;
+    private int dineroDisponible=200;
 
     public Partida(Inventario inventarioTienda, ArrayList<PersonajeJugable> party, ArrayList<Enemigo> enemigos) {
         this.inventarioTienda = inventarioTienda;
         this.party = party;
         this.enemigos = enemigos;
+        this.dineroDisponible=200;
+
     }
 
     public Partida(){
@@ -58,5 +61,26 @@ this.enemigos = new ArrayList<>();
         return estado;
     }
 
+    public PersonajeJugable getPersonajeJugable(String nombre){
+        for (PersonajeJugable pj : party){
+            if(pj.getNombre().equals(nombre)){
+                return pj;
+            }
+        }
+        return null;
+    }
+
+    public int getDineroDisponible() {
+        return dineroDisponible;
+    }
+
+    public void setDineroDisponible(int dineroDisponible) {
+        this.dineroDisponible = dineroDisponible;
+    }
+
+    public boolean agregarTienda(Inventario inventario){
+        this.inventarioTienda = inventario;
+        return true;
+    }
 }
 
