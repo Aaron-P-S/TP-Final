@@ -35,6 +35,21 @@ public int atacar(Enemigo enemigo) {
         return 0;
 }
 
+    public boolean agregarInventario(String nombre, Item item){
+        inventario.agregarItem(nombre,item);
+        return true;
+    }
+
+    public boolean cambiarCantidad(String nombre){
+        inventario.aumentarCantidad(nombre);
+        return true;
+    }
+
+    public StringBuilder mostrarInventario(){
+        return inventario.mostrarInventario();
+    }
+
+
     @Override
     public String toString() {
         return "PersonajeJugable{" +super.toString()
