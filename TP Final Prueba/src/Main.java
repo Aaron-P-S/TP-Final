@@ -45,7 +45,7 @@ public class Main {
         Item item1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 2, true, 50);
 
         inventarioTienda.agregarItem("Pocion de Vida",item1);
-        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 20, 2, false, 60);
+        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 200, 2, false, 60);
         inventarioTienda.agregarItem("Espada Larga",item2);
 
         //llamamos a las clases
