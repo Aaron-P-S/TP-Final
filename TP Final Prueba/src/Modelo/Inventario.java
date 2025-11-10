@@ -39,12 +39,13 @@ public class Inventario {
                         dineroDisponible -= (int) inventario.get(nombre).getPrecio();
                         inventario.get(nombre).setCantidad(inventario.get(nombre).getCantidad() - 1);
                         personajeJugable.cambiarCantidad(nombre);
+                        System.out.println("💸 ¡¡Compra Realizada!! 💸");
                         return dineroDisponible;
                     } else{
-                        throw new NoHayStockEnTiendaException("No hay stock de ese item");
+                        throw new NoHayStockEnTiendaException("📦 No hay stock de ese item 📦");
                     }
                 }else{
-                    throw new NoTienesDineroSuficienteException("No tienes dinero suficiente para comprar");
+                    throw new NoTienesDineroSuficienteException("🪰 No tienes dinero suficiente para comprar 🪰");
                 }
             }
         }catch (NoHayStockEnTiendaException e){
