@@ -183,6 +183,8 @@ public class Menu {
                         System.out.println("+-----------------------🤺---------------------------+");
                         int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
                         System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
+                        System.out.println(partida.vidaParty());
+                        System.out.println("+----------------------------------------------------+");
                         System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");
 
                         turno++;

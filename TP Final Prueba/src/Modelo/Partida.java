@@ -18,9 +18,9 @@ public class Partida {
     }
 
     public Partida(){
-this.inventarioTienda = new Inventario();
-this.party = new ArrayList<>();
-this.enemigos = new ArrayList<>();
+    this.inventarioTienda = new Inventario();
+    this.party = new ArrayList<>();
+    this.enemigos = new ArrayList<>();
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable){
@@ -81,6 +81,15 @@ this.enemigos = new ArrayList<>();
     public boolean agregarTienda(Inventario inventario){
         this.inventarioTienda = inventario;
         return true;
+    }
+
+    public String vidaParty(){
+
+        String S = "         "+party.get(0).getNombre() +"                   "+ party.get(1).getNombre() +"                   "+ party.get(2).getNombre() +"                  "+ party.get(3).getNombre()+"\n" +
+                "  | "+party.get(0).getPuntosDeVidaActual() + " ❤️ de " + party.get(0).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(1).getPuntosDeVidaActual() + " ❤️ de " + party.get(1).getPuntosDeVidaMaxima() + " 💖  |  | "+ party.get(2).getPuntosDeVidaActual()  + " ❤️ de " + party.get(2).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(3).getPuntosDeVidaActual() + " ❤️ de " + party.get(3).getPuntosDeVidaMaxima() + " 💖  |";
+
+
+        return S;
     }
 }
 
