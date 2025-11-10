@@ -7,7 +7,7 @@ public class Partida {
     Inventario inventarioTienda;
     ArrayList<PersonajeJugable> party;
     ArrayList<Enemigo> enemigos;
-    private int dineroDisponible=200;
+    private int dineroDisponible;
 
     public Partida(Inventario inventarioTienda, ArrayList<PersonajeJugable> party, ArrayList<Enemigo> enemigos) {
         this.inventarioTienda = inventarioTienda;
@@ -18,9 +18,10 @@ public class Partida {
     }
 
     public Partida(){
-    this.inventarioTienda = new Inventario();
-    this.party = new ArrayList<>();
-    this.enemigos = new ArrayList<>();
+this.inventarioTienda = new Inventario();
+this.party = new ArrayList<>();
+this.enemigos = new ArrayList<>();
+this.dineroDisponible=200;
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable){

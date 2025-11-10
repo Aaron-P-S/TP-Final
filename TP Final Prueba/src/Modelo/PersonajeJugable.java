@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class PersonajeJugable extends Entidad {
     E_Clases clases;
     Inventario inventario;
+
     public PersonajeJugable(String nombre, E_Clases clase) {
         super(nombre);
         this.clases = clase;
@@ -20,17 +21,22 @@ public class PersonajeJugable extends Entidad {
 
 public int atacar(Enemigo enemigo) {
         if(getClases().equals(E_Clases.GUERRERO)){
-            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-100);
-            return 100;
+            if(inventario.inventario.containsKey("Espada")){
+                enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.GUERRERO.getDano()*2);
+                return E_Clases.GUERRERO.getDano()*2;
+            }else {
+                enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual() - E_Clases.GUERRERO.getDano());
+                return E_Clases.GUERRERO.getDano();
+            }
         }else if(getClases().equals(E_Clases.MAGO)){
-            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-50);
-            return 50;
+            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.MAGO.getDano());
+            return E_Clases.MAGO.getDano();
         }else if(getClases().equals(E_Clases.ARQUERO)){
-            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-125);
-            return 125;
+            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()- E_Clases.ARQUERO.getDano());
+            return E_Clases.ARQUERO.getDano();
         }else if(getClases().equals(E_Clases.BARBARO)){
-            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-75);
-            return 75;
+            enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.BARBARO.getDano());
+            return E_Clases.BARBARO.getDano();
         }
         return 0;
 }
@@ -48,7 +54,10 @@ public int atacar(Enemigo enemigo) {
     public StringBuilder mostrarInventario(){
         return inventario.mostrarInventario();
     }
-
+    public void subirDeNivel(int nivel){
+        setPuntosDeVidaMaxima(((int) (getPuntosDeVidaMaxima() * (1 + 0.15 * nivel))));
+        setVivoOMuerto(true);
+    }
 
     @Override
     public String toString() {
