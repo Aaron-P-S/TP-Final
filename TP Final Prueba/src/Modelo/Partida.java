@@ -83,5 +83,14 @@ this.dineroDisponible=200;
         this.inventarioTienda = inventario;
         return true;
     }
+
+    public String vidaParty(){
+
+        String S = "         "+party.get(0).getNombre() +"                   "+ party.get(1).getNombre() +"                   "+ party.get(2).getNombre() +"                  "+ party.get(3).getNombre()+"\n" +
+                "  | "+party.get(0).getPuntosDeVidaActual() + " ❤️ de " + party.get(0).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(1).getPuntosDeVidaActual() + " ❤️ de " + party.get(1).getPuntosDeVidaMaxima() + " 💖  |  | "+ party.get(2).getPuntosDeVidaActual()  + " ❤️ de " + party.get(2).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(3).getPuntosDeVidaActual() + " ❤️ de " + party.get(3).getPuntosDeVidaMaxima() + " 💖  |";
+
+
+        return S;
+    }
 }
 
