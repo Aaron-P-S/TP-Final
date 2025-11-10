@@ -5,7 +5,6 @@ import Enumeradores.E_TipoItem;
 public class Item {
     private String nombre;
     private String descripcion;
-    //precio dentro del item?
     private double precio;
     private int cantidad;
     private boolean esConsumible;
