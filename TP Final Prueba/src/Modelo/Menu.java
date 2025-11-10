@@ -135,8 +135,9 @@ public class Menu {
             switch (eleccionCombate) {
                 case 0:
                     System.out.println("+-👾👾👾------------------------------------------------+");
+                    System.out.println("Es el turno de "+partida.party.get(turno).getNombre());
                     System.out.println("Ingrese un numero segun la accion que quiera realizar en el combate:\n" +
-                            "| 1. atacar |  | 2. salir  | 3. Inventario |\n");
+                            "| 1. atacar |  | 2. Inventario  | 3. Salir |\n");
                     try {
                         eleccionCombate = sc.nextInt();
                         sc.nextLine();
@@ -148,6 +149,20 @@ public class Menu {
                     break;
                 case 1:
                     //atacar
+
+                    if (!partida.party.get(turno).isVivoOMuerto()) {
+                        System.out.println("+-----------------------☠️---------------------------+");
+                        System.out.println(partida.party.get(turno).getNombre() + " esta muerto, se salteara su turno ");
+                        turno++;
+                    } else {
+                        System.out.println("+-----------------------🤺---------------------------+");
+                        int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
+                        System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
+                        System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");
+
+                        turno++;
+
+                        }
                     if (turno + 1 > partida.party.size()) {
                         int numeroRandom = (int) (Math.random() * 101);
                         int eleccionEnemigo = 0;
@@ -175,20 +190,14 @@ public class Menu {
                         System.out.println( "La vida actual de "+ partida.party.get(eleccionEnemigo).getNombre() +" es "+ partida.party.get(eleccionEnemigo).getPuntosDeVidaActual() + " ❤️");
                         turno = 0;
                     }
-                    if (!partida.party.get(turno).isVivoOMuerto()) {
-                        System.out.println("+-----------------------☠️---------------------------+");
-                        System.out.println(partida.party.get(turno).getNombre() + " esta muerto, se salteara su turno ");
-                        turno++;
-                    } else {
-                        System.out.println("+-----------------------🤺---------------------------+");
-                        int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
-                        System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
-                        System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");
-
-                        turno++;
-
-                    }
                     eleccionCombate = 0;
+                    break;
+                case 2:
+                    System.out.println("Ingrese un numero segun el item que quiera utilizar");
+                    if(partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Vida"),partida.party.get(turno))) {
+                        turno++;
+                    }
+                    eleccionCombate=0;
                     break;
                 default:
                     throw new NumeroNoValidoException("⭕ Se escogio un numero no valido, intentelo de nuevo ⭕");

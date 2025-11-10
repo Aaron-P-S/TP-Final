@@ -1,5 +1,7 @@
 package Modelo;
 
+import Enumeradores.E_TipoItem;
+
 public class Item {
     private String nombre;
     private String descripcion;
@@ -8,14 +10,23 @@ public class Item {
     private int cantidad;
     private boolean esConsumible;
     private int estadistica;
-
-    public Item(String nombre, String descripcion, double precio, int cantidad, boolean esConsumible, int estadistica) {
+    private E_TipoItem tipo;
+    public Item(String nombre, String descripcion, double precio, int cantidad, boolean esConsumible, int estadistica,E_TipoItem tipo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
         this.esConsumible = esConsumible;
         this.estadistica = estadistica;
+        this.tipo = tipo;
+    }
+
+    public E_TipoItem getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(E_TipoItem tipo) {
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -65,7 +76,7 @@ public class Item {
     public void setEstadistica(int estadistica) {
         this.estadistica = estadistica;
     }
-
+//modificar para que diga el tipo de item
     @Override
     public String toString() {
         return "Item{" +

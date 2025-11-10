@@ -1,4 +1,5 @@
 import Enumeradores.E_Clases;
+import Enumeradores.E_TipoItem;
 import Modelo.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -31,8 +32,8 @@ public class Main {
 
 
         //inventarios pjs
-        Item itemPJ1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 0, true, 50);
-        Item itemPJ2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 20, 0, false, 60);
+        Item itemPJ1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 0, true, 50, E_TipoItem.PUNTOSDEVIDA);
+        Item itemPJ2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 20, 0, false, 60,E_TipoItem.PUNTOSDEATAQUE);
 
         personajeJugable.agregarInventario("Pocion de Vida", itemPJ1);
         personajeJugable.agregarInventario("Espada Larga", itemPJ2);
@@ -40,12 +41,17 @@ public class Main {
         personajeJugable1.agregarInventario("Pocion de Vida", itemPJ1);
         personajeJugable1.agregarInventario("Espada Larga", itemPJ2);
 
+        personajeJugable2.agregarInventario("Pocion de Vida", itemPJ2);
+        personajeJugable2.agregarInventario("Espada Larga", itemPJ2);
+
+        personajeJugable3.agregarInventario("Pocion de Vida", itemPJ2);
+        personajeJugable3.agregarInventario("Espada Larga", itemPJ2);
         //tienda
         Inventario inventarioTienda = new Inventario();
-        Item item1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 2, true, 50);
+        Item item1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 2, true, 50,E_TipoItem.PUNTOSDEVIDA);
 
         inventarioTienda.agregarItem("Pocion de Vida",item1);
-        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 200, 2, false, 60);
+        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 200, 2, false, 60,E_TipoItem.PUNTOSDEATAQUE);
         inventarioTienda.agregarItem("Espada Larga",item2);
 
         //llamamos a las clases
