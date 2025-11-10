@@ -15,16 +15,20 @@ public class Entidad {
         this.vivoOMuerto = true;
     }
 
-    public int getPuntosDeVidaActual() { return puntosDeVidaActual; }
+    public int getPuntosDeVidaActual() {
+        return puntosDeVidaActual;
+    }
 
     public void setPuntosDeVidaActual(int puntosDeVida) {
-        if(puntosDeVida > 0) {
-            this.puntosDeVidaActual = puntosDeVida;
-        }else {
-            setVivoOMuerto(false);
-            puntosDeVidaActual = 0;
-        }
-         }
+        if (getPuntosDeVidaActual() + puntosDeVida < puntosDeVidaMaxima) {
+            if (puntosDeVida > 0) {
+                this.puntosDeVidaActual = puntosDeVida;
+            } else {
+                setVivoOMuerto(false);
+                puntosDeVidaActual = 0;
+            }
+        } else puntosDeVidaActual = puntosDeVidaMaxima;
+    }
 
     public String getNombre() {
         return nombre;

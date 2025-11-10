@@ -1,5 +1,6 @@
 package Modelo;
 
+import Enumeradores.E_Clases;
 import Excepciones.NumeroNoValidoException;
 import Excepciones.TodosLosMiembrosMuertosException;
 
@@ -47,7 +48,7 @@ public class Menu {
                             throw new TodosLosMiembrosMuertosException("☠️ Han muerto todos los miembros de la party ☠️");
                         }
                         nivel++;
-                        if(nivel%3==0){
+                        if (nivel % 3 == 0) {
                             System.out.println("Felicitaciones! Tu party a subido de nivel");
                             partida.party.get(0).subirDeNivel(nivel);
                             partida.party.get(1).subirDeNivel(nivel);
@@ -204,23 +205,23 @@ public class Menu {
                 case 2:
                     System.out.println(partida.vidaParty());
                     System.out.println("Ingrese un numero segun el item que quiera utilizar");
-                    System.out.println("1-> Pocion de vida "+"2-> Pocion de Resurreccion "+"3-> Pocion de dano");
-                    switch (sc.nextInt()){
+                    System.out.println("1-> Pocion de vida " + "2-> Pocion de Resurreccion " + "3-> Pocion de dano");
+                    switch (sc.nextInt()) {
                         case 1:
                             if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Vida"), partida.party.get(turno))) {
                                 turno++;
                             }
                             break;
-                            case 2:
-                                if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Resurreccion"), partida.party.get(turno))){
-                                    turno++;
-                                }
-                                break;
-                                case 3:
-                                    if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Dano"), partida.party.get(turno))){
-                                        turno++;
-                                    }
-                                    break;
+                        case 2:
+                            if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Resurreccion"), partida.party.get(turno))) {
+                                turno++;
+                            }
+                            break;
+                        case 3:
+                            if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Dano"), partida.party.get(turno))) {
+                                turno++;
+                            }
+                            break;
                     }
 
                     eleccionCombate = 0;
@@ -230,6 +231,21 @@ public class Menu {
             }
         }
         return partida.estadoParty();
+    }
+
+    public void usarHabilidad(Enemigo enemigo) {
+        if (partida.party.get(nivel).getClases().equals(E_Clases.GUERRERO)) {
+            partida.party.get(nivel).atacar(enemigo);
+        } else if (partida.party.get(nivel).getClases().equals(E_Clases.MAGO)) {
+            partida.party.get(0).setPuntosDeVidaActual(partida.party.get(0).getPuntosDeVidaActual()+25);
+            partida.party.get(1).setPuntosDeVidaActual(partida.party.get(1).getPuntosDeVidaActual()+25);
+            partida.party.get(2).setPuntosDeVidaActual(partida.party.get(2).getPuntosDeVidaActual()+25);
+            partida.party.get(3).setPuntosDeVidaActual(partida.party.get(3).getPuntosDeVidaActual()+25);
+        } else if (partida.party.get(nivel).getClases().equals(E_Clases.ARQUERO)) {
+                partida.setDineroDisponible(partida.getDineroDisponible()+((int) (25 * (1 + 0.25 * nivel))));
+        } else if (partida.party.get(nivel).getClases().equals(E_Clases.BARBARO)) {
+//inmortalidad por dos turnos
+        }
     }
 
 }
