@@ -17,14 +17,15 @@ public class Entidad {
 
     public int getPuntosDeVidaActual() { return puntosDeVidaActual; }
 
-    public void setPuntosDeVidaActual(int puntosDeVida) {
+    public int setPuntosDeVidaActual(int puntosDeVida) {
         if(puntosDeVida > 0) {
             this.puntosDeVidaActual = puntosDeVida;
         }else {
             setVivoOMuerto(false);
             puntosDeVidaActual = 0;
         }
-         }
+        return puntosDeVida;
+    }
 
     public String getNombre() {
         return nombre;

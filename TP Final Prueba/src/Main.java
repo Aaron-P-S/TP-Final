@@ -51,8 +51,17 @@ public class Main {
         Item item1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 2, true, 50,E_TipoItem.PUNTOSDEVIDA);
 
         inventarioTienda.agregarItem("Pocion de Vida",item1);
-        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 200, 2, false, 60,E_TipoItem.PUNTOSDEATAQUE);
+        Item item2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 200, 2, false, 0,E_TipoItem.PUNTOSDEATAQUE);
         inventarioTienda.agregarItem("Espada Larga",item2);
+        Item item3 = new Item("Arco Largo", "Un gran arco que aumenta la potencia de tus flechas", 300, 1, false, 0, E_TipoItem.PUNTOSDEATAQUE);
+        inventarioTienda.agregarItem("Arco Largo",item3);
+        Item item4 = new Item("Maza de Bridas", "Gran maza con puntas recurvada que te cura 20 por cada ataque", 500, 1, false, 0, E_TipoItem.PUNTOSDEATAQUE);
+        inventarioTienda.agregarItem("Maza de Bridas",item4);
+        Item item5 = new Item("Baculo de Toth", "Un poderoso baculo capaz de destruir a sus enemigos", 1000, 1, false, 0, E_TipoItem.PUNTOSDEATAQUE);
+        inventarioTienda.agregarItem("Baculo de Toth", item5);
+        Item item6 = new Item("Pocion de Revivir", "Una increible pocion que tiene la capacidad de traer del mundo de los muertos a su portador", 600, 1, true, 0, E_TipoItem.REVIVIR);
+        inventarioTienda.agregarItem("Pocion de Revivir", item6);
+
 
         //llamamos a las clases
         Partida partida =new Partida();

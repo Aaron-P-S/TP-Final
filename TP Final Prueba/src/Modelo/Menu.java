@@ -142,7 +142,8 @@ public class Menu {
             switch (eleccionCombate) {
                 case 0:
                     System.out.println("+-👾👾👾------------------------------------------------+");
-                    System.out.println(partida.vidaParty());
+                    System.out.println(partida.vidaParty(nivel));
+                    System.out.println("+--------------------------------------------------------+");
                     System.out.println("Es el turno de " + partida.party.get(turno).getNombre());
                     System.out.println("Ingrese un numero segun la accion que quiera realizar en el combate:\n" +
                             "| 1. atacar |  | 2. Inventario  | 3. Salir |\n");
@@ -164,7 +165,7 @@ public class Menu {
                         turno++;
                     } else {
                         System.out.println("+-----------------------🤺---------------------------+");
-                        System.out.println(partida.vidaParty());
+                        System.out.println(partida.vidaParty(nivel));
                         int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
                         System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
                         System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");
@@ -202,7 +203,8 @@ public class Menu {
                     eleccionCombate = 0;
                     break;
                 case 2:
-                    System.out.println(partida.vidaParty());
+                    System.out.println(partida.vidaParty(nivel));
+                    System.out.println("+----------------------------------------------------+");
                     System.out.println("Ingrese un numero segun el item que quiera utilizar");
                     System.out.println("1-> Pocion de vida "+"2-> Pocion de Resurreccion "+"3-> Pocion de dano");
                     switch (sc.nextInt()){
