@@ -3,6 +3,9 @@ package Modelo;
 import Enumeradores.E_Clases;
 import Excepciones.NumeroNoValidoException;
 import Excepciones.TodosLosMiembrosMuertosException;
+import GestoraJson.GestorJson;
+import JsonUtiles.JsonUtiles;
+import org.json.JSONArray;
 
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -107,10 +110,10 @@ public class Menu {
                                 System.out.println("1. Pocion de Vida 2. Pocion de Revivir");
                                 switch (sc.nextInt()) {
                                     case 1:
-                                        nombreObjeto="Pocion de Vida";
+                                        nombreObjeto = "Pocion de Vida";
                                         break;
                                     case 2:
-                                        nombreObjeto="Pocion de Revivir";
+                                        nombreObjeto = "Pocion de Revivir";
                                         break;
                                     default:
                                         System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
@@ -155,13 +158,13 @@ public class Menu {
                                 sc.nextLine();
                                 switch (sc.nextInt()) {
                                     case 1:
-                                        if(partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)){
+                                        if (partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)) {
                                             nombreObjeto = "Baculo de Toth";
-                                        }else if(partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)){
+                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)) {
                                             nombreObjeto = "Arco Largo";
-                                        }else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)){
+                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)) {
                                             nombreObjeto = "Espada Larga";
-                                        }else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)){
+                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)) {
                                             nombreObjeto = "Maza de Bridas";
                                         }
                                         break;
@@ -218,14 +221,21 @@ public class Menu {
                     System.out.println("+--------------------------------------------------------+");
                     System.out.println("Es el turno de " + partida.party.get(turno).getNombre());
                     System.out.println("Ingrese un numero segun la accion que quiera realizar en el combate:\n" +
-                            "| 1. atacar |  | 2. Inventario  | 3. Salir |\n");
+                            "| 1. atacar |  | 2. Inventario  |\n");
                     try {
                         eleccionCombate = sc.nextInt();
+                        if (eleccionCombate < 0||eleccionCombate>2) throw new NumeroNoValidoException("Se ingreso un numero no valido");
                         sc.nextLine();
                     } catch (InputMismatchException e) {
                         System.out.println("⭕ No se ingreso un numero, intentelo de nuevo ⭕");
-                        eleccionCombate = 0;
                         sc.nextLine();
+                        eleccionCombate = 0;
+                        break;
+                    } catch (NumeroNoValidoException e) {
+                        System.out.println(e.getMessage());
+                        sc.nextLine();
+                        eleccionCombate = 0;
+                        break;
                     }
                     break;
                 case 1:
@@ -277,30 +287,46 @@ public class Menu {
                     System.out.println("+----------------------------------------------------+");
                     System.out.println("Ingrese un numero segun el item que quiera utilizar");
                     System.out.println("1-> Pocion de vida " + "2-> Pocion de Resurreccion " + "3-> Pocion de dano");
-                    switch (sc.nextInt()) {
-                        case 1:
-                            if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Vida"), partida.party.get(turno))) {
-                                turno++;
-                            }
-                            break;
-                        case 2:
-                            if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Resurreccion"), partida.party.get(turno))) {
-                                turno++;
-                            }
-                            break;
-                        case 3:
-                            if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Dano"), partida.party.get(turno))) {
-                                turno++;
-                            }
-                            break;
+                    try {
+                        switch (sc.nextInt()) {
+                            case 1:
+                                if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Vida"), partida.party.get(turno))) {
+                                    turno++;
+                                }else{
+                                    System.out.println();
+                                }
+                                break;
+                            case 2:
+                                if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Revivir"), partida.party.get(turno))) {
+                                    turno++;
+                                }else {
+                                    System.out.println("El personaje que se quiere revivir esta vivo");
+                                }
+                                break;
+                            case 3:
+                                System.out.println("Trabajo en proceso");
+                                break;
+                            default:
+                                throw new NumeroNoValidoException("⭕ Se escogio un numero no valido, intentelo de nuevo ⭕");
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("No se ingreso un numero valido");
+                        sc.nextLine();
+                        break;
+                    } catch (NumeroNoValidoException e) {
+                        System.out.println(e.getMessage());
+                        sc.nextLine();
+                        break;
                     }
-
                     eleccionCombate = 0;
                     break;
                 default:
-                    throw new NumeroNoValidoException("⭕ Se escogio un numero no valido, intentelo de nuevo ⭕");
+                    throw new NumeroNoValidoException("No se ingreso un numero valido");
             }
         }
+//        GestorJson gestorJson = new GestorJson();
+//        JSONArray todos=gestorJson.pasarDeArrayAJson(partida.enemigos,partida.getParty(),partida.getInventarioTienda());
+//        JsonUtiles.grabarUnJson(todos,"Juego1");
         return partida.estadoParty();
     }
 
@@ -308,15 +334,16 @@ public class Menu {
         if (partida.party.get(nivel).getClases().equals(E_Clases.GUERRERO)) {
             partida.party.get(nivel).atacar(enemigo);
         } else if (partida.party.get(nivel).getClases().equals(E_Clases.MAGO)) {
-            partida.party.get(0).setPuntosDeVidaActual(partida.party.get(0).getPuntosDeVidaActual()+25);
-            partida.party.get(1).setPuntosDeVidaActual(partida.party.get(1).getPuntosDeVidaActual()+25);
-            partida.party.get(2).setPuntosDeVidaActual(partida.party.get(2).getPuntosDeVidaActual()+25);
-            partida.party.get(3).setPuntosDeVidaActual(partida.party.get(3).getPuntosDeVidaActual()+25);
+            partida.party.get(0).setPuntosDeVidaActual(partida.party.get(0).getPuntosDeVidaActual() + 25);
+            partida.party.get(1).setPuntosDeVidaActual(partida.party.get(1).getPuntosDeVidaActual() + 25);
+            partida.party.get(2).setPuntosDeVidaActual(partida.party.get(2).getPuntosDeVidaActual() + 25);
+            partida.party.get(3).setPuntosDeVidaActual(partida.party.get(3).getPuntosDeVidaActual() + 25);
         } else if (partida.party.get(nivel).getClases().equals(E_Clases.ARQUERO)) {
-                partida.setDineroDisponible(partida.getDineroDisponible()+((int) (25 * (1 + 0.25 * nivel))));
+            partida.setDineroDisponible(partida.getDineroDisponible() + ((int) (25 * (1 + 0.25 * nivel))));
         } else if (partida.party.get(nivel).getClases().equals(E_Clases.BARBARO)) {
 //inmortalidad por dos turnos
         }
     }
 
 }
+
