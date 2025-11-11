@@ -117,6 +117,7 @@ public class Main {
             JSONArray jsonArray= new JSONArray(JsonUtiles.leerUnJson("Todos"));
             System.out.println(gestorJson.pasarDeJsonAListaEnemigos(jsonArray));
             System.out.println(gestorJson.pasarDeJsonAParty(jsonArray));
+            System.out.println();
         }catch (JSONException e){
             e.printStackTrace();
         }

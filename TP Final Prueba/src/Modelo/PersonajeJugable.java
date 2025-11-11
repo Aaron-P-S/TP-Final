@@ -81,7 +81,7 @@ public int atacar(Enemigo enemigo) {
     public String toString() {
         return "PersonajeJugable{" +super.toString()
                 + "clases=" + clases
-                + "inventario=" + inventario + "}";
+                + "inventario=" + inventario.toString() + "}";
 
     }
 
@@ -90,7 +90,7 @@ public int atacar(Enemigo enemigo) {
         JSONObject personajeJugableJson = new JSONObject();
         personajeJugableJson.put("nombre", getNombre());
         personajeJugableJson.put("clases", getClases());
-        JSONArray inventarioJson = new JSONArray();
+        JSONObject inventarioJson = inventario.toJson();
         personajeJugableJson.put("inventario", inventarioJson);
         return personajeJugableJson;
     }

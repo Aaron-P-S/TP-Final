@@ -145,6 +145,13 @@ public class Inventario implements Jsonable {
     }
 
     @Override
+    public String toString() {
+        return "Inventario{" +
+                "inventario=" + mostrarInventario() +
+                '}';
+    }
+
+    @Override
     public JSONObject toJson() {
         JSONObject inventarioJson = new JSONObject();
         JSONArray contenidoJSon= new JSONArray();
