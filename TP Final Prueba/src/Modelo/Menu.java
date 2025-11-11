@@ -1,11 +1,13 @@
 package Modelo;
 
+import Enumeradores.E_Clases;
 import Excepciones.NumeroNoValidoException;
 import Excepciones.TodosLosMiembrosMuertosException;
 
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.SortedMap;
 
 public class Menu {
     //Coleccion donde guardamos las diferentes partidas
@@ -28,7 +30,7 @@ public class Menu {
                     System.out.println("Bienvenido al juego ...\n" +
                             "Ingrese un numero para continuar:\n" +
                             "1. Empezar pelea:\n" +
-                            "2. Visitar la tienda\n" +
+                            "2. Visitar la Plaza de los Gremios\n" +
                             "3. Salir\n");
                     try {
                         eleccion = sc.nextInt();
@@ -67,48 +69,118 @@ public class Menu {
                     String nombre = "";
                     String nombreObjeto = "";
                     int flag = 0;
+                    int numeroDePj = 0;
                     do {
 
                         System.out.println("+-🛍️🛍️🛍️------------------------------------------------+");
-                        System.out.println("Bienvenido a la tienda!");
-                        System.out.println(partida.inventarioTienda.mostrarInventario().toString());
-                        System.out.println("DINERO DISPONIBLE = $$$" + partida.getDineroDisponible());
+                        System.out.println("Bienvenido a la Plaza de los Gremios!");
                         System.out.println("+----------------------------------------------------+");
-                        System.out.println("Ingrese a quien desea comprar el item");
-                        System.out.println("1-> " + partida.party.get(0).getNombre() + " | 2->" + partida.party.get(1).getNombre() + "| 3-> " + partida.party.get(2).getNombre() + " | 4-> " + partida.party.get(3).getNombre());
+                        System.out.println("A que tienda quieres ir?");
+                        System.out.println("1- ❤️‍🩹 La tienda del maestro Emma | 2- ⚔️ La Forja de los Nueve Nicos ");
                         switch (sc.nextInt()) {
                             case 1:
-                                nombre = partida.party.get(0).getNombre();
+                                System.out.println("Ingrese quien desea entrar a la tienda, pues solo de a uno se debe de entrar...");
+                                System.out.println("1-> " + partida.party.get(0).getNombre() + " | 2->" + partida.party.get(1).getNombre() + "| 3-> " + partida.party.get(2).getNombre() + " | 4-> " + partida.party.get(3).getNombre());
+                                switch (sc.nextInt()) {
+                                    case 1:
+                                        nombre = partida.party.get(0).getNombre();
+                                        break;
+                                    case 2:
+                                        nombre = partida.party.get(1).getNombre();
+                                        break;
+                                    case 3:
+                                        nombre = partida.party.get(2).getNombre();
+                                        break;
+                                    case 4:
+                                        nombre = partida.party.get(3).getNombre();
+                                        break;
+                                    default:
+                                        System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                        sc.nextLine();
+                                        break;
+                                }
+                                System.out.println(" °º¤ø,¸Bienvenido a La tienda del maestro Emma¸,ø¤º° ");
+                                System.out.println("( ͡° ͜ʖ ͡°) -> estabas buscando un ALQUIMISTA!?");
+                                System.out.println(partida.inventarioTienda.mostrarInventarioAlquimia());
+                                System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
+                                System.out.println("Ingrese el item que desea comprar: ");
+                                System.out.println("1. Pocion de Vida 2. Pocion de Revivir");
+                                switch (sc.nextInt()) {
+                                    case 1:
+                                        nombreObjeto="Pocion de Vida";
+                                        break;
+                                    case 2:
+                                        nombreObjeto="Pocion de Revivir";
+                                        break;
+                                    default:
+                                        System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                        sc.nextLine();
+                                        break;
+                                }
+
                                 break;
                             case 2:
-                                nombre = partida.party.get(1).getNombre();
-                                break;
-                            case 3:
-                                nombre = partida.party.get(2).getNombre();
-                                break;
-                            case 4:
-                                nombre = partida.party.get(3).getNombre();
-                                break;
-                            default:
-                                System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                System.out.println("Ingrese quien desea entrar a la tienda, pues solo de a uno se debe de entrar...");
+                                System.out.println("1-> " + partida.party.get(0).getNombre() + " | 2->" + partida.party.get(1).getNombre() + "| 3-> " + partida.party.get(2).getNombre() + " | 4-> " + partida.party.get(3).getNombre());
+                                switch (sc.nextInt()) {
+                                    case 1:
+                                        nombre = partida.party.get(0).getNombre();
+                                        numeroDePj = 0;
+                                        break;
+                                    case 2:
+                                        nombre = partida.party.get(1).getNombre();
+                                        numeroDePj = 1;
+                                        break;
+                                    case 3:
+                                        nombre = partida.party.get(2).getNombre();
+                                        numeroDePj = 2;
+                                        break;
+                                    case 4:
+                                        nombre = partida.party.get(3).getNombre();
+                                        numeroDePj = 3;
+                                        break;
+                                    default:
+                                        System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                        sc.nextLine();
+                                        break;
+                                }
+
+                                System.out.println(" +--[♦]==< Bienvenido a LA FORJA DE LOS NUEVE NICOS >==[♦]--+ ");
+                                System.out.println("( ͡° ͜ʖ ͡°) -> Tengo TODO seas un Mago, Arquero, Guerrero o Barbaro! Aqui esta lo que necesitas!");
+                                System.out.println("Asi que eres un " + partida.party.get(numeroDePj).getClases());
+                                System.out.println(partida.inventarioTienda.mostrarInventarioArmeria(partida.party.get(numeroDePj)));
+                                System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
+                                System.out.println("Desea comprar ese item?: ");
+                                System.out.println("1. Si | 2. No");
                                 sc.nextLine();
+                                switch (sc.nextInt()) {
+                                    case 1:
+                                        if(partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)){
+                                            nombreObjeto = "Baculo de Toth";
+                                        }else if(partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)){
+                                            nombreObjeto = "Arco Largo";
+                                        }else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)){
+                                            nombreObjeto = "Espada Larga";
+                                        }else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)){
+                                            nombreObjeto = "Maza de Bridas";
+                                        }
+                                        break;
+                                    case 2:
+                                        nombreObjeto = "null";
+                                        break;
+                                    default:
+                                        System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                        sc.nextLine();
+                                        break;
+                                }
                                 break;
-                        }
-                        System.out.println("+----------------------------------------------------+");
-                        System.out.println("Ingrese el nombre del item que desea comprar");
-                        System.out.println("1- ❤️‍🩹 Pocion de vida | 2- ⚔️ Espada Larga");
-                        switch (sc.nextInt()) {
-                            case 1:
-                                nombreObjeto = "Pocion de Vida";
-                                break;
-                            case 2:
-                                nombreObjeto = "Espada Larga";
-                                break;
+
                             default:
                                 System.out.println("⭕ Se ingreso un numero no valido, intentelo de nuevo ⭕");
                                 sc.nextLine();
                                 break;
                         }
+
 
                         System.out.println("+-💰💰💰---------------------------------------------+");
                         partida.setDineroDisponible(partida.inventarioTienda.comprarItem(partida.getPersonajeJugable(nombre), nombreObjeto, partida.getDineroDisponible()));
@@ -117,7 +189,7 @@ public class Menu {
                         System.out.println("Inventario de: " + nombre);
                         System.out.println(partida.getPersonajeJugable(nombre).mostrarInventario());
                         System.out.println("+----------------------------------------------------+");
-                        System.out.println("Desea volver a la tienda? ");
+                        System.out.println("Desea volver a la Plaza de los Gremios? ");
                         System.out.println("| 1. Si | | 2. No |");
                         flag = sc.nextInt();
                     } while (flag == 1);
@@ -164,8 +236,6 @@ public class Menu {
                         System.out.println(partida.party.get(turno).getNombre() + " esta muerto, se salteara su turno ");
                         turno++;
                     } else {
-                        System.out.println("+-----------------------🤺---------------------------+");
-                        System.out.println(partida.vidaParty(nivel));
                         int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
                         System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
                         System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");

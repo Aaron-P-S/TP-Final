@@ -21,7 +21,7 @@ public class PersonajeJugable extends Entidad {
 
 public int atacar(Enemigo enemigo) {
         if(getClases().equals(E_Clases.GUERRERO)){
-            if(inventario.inventario.containsKey("Espada")){
+            if(inventario.inventario.containsKey("Espada Larga")){
                 enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.GUERRERO.getDano()*2);
                 return E_Clases.GUERRERO.getDano()*2;
             }else {
@@ -29,22 +29,25 @@ public int atacar(Enemigo enemigo) {
                 return E_Clases.GUERRERO.getDano();
             }
         }else if(getClases().equals(E_Clases.MAGO)){
-            if(inventario.inventario.containsKey("Baculo")){
-                return enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.MAGO.getDano()*5);
+            if(inventario.inventario.containsKey("Baculo de Toth")){
+                enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.MAGO.getDano()*5);
+                return E_Clases.MAGO.getDano()*5;
             }else {
                 enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual() - E_Clases.MAGO.getDano());
                 return E_Clases.MAGO.getDano();
             }
         }else if(getClases().equals(E_Clases.ARQUERO)){
-            if(inventario.inventario.containsKey("Arco")){
+            if(inventario.inventario.containsKey("Arco Largo")){
                 enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.ARQUERO.getDano()*3);
+                return E_Clases.ARQUERO.getDano()*3;
             }
             enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()- E_Clases.ARQUERO.getDano());
             return E_Clases.ARQUERO.getDano();
         }else if(getClases().equals(E_Clases.BARBARO)){
-            if(inventario.inventario.containsKey("Maza")){
+            if(inventario.inventario.containsKey("Maza de Bridas")){
                 setPuntosDeVidaActual(getPuntosDeVidaActual()+20);
-                return enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.BARBARO.getDano())*2;
+                enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.BARBARO.getDano()*2);
+                return E_Clases.BARBARO.getDano()*2;
             }else {
             enemigo.setPuntosDeVidaActual(enemigo.getPuntosDeVidaActual()-E_Clases.BARBARO.getDano());
             return E_Clases.BARBARO.getDano();

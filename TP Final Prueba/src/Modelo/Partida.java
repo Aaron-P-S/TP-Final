@@ -13,7 +13,7 @@ public class Partida {
         this.inventarioTienda = inventarioTienda;
         this.party = party;
         this.enemigos = enemigos;
-        this.dineroDisponible=200;
+        this.dineroDisponible=20000;
 
     }
 
@@ -21,7 +21,7 @@ public class Partida {
 this.inventarioTienda = new Inventario();
 this.party = new ArrayList<>();
 this.enemigos = new ArrayList<>();
-this.dineroDisponible=200;
+this.dineroDisponible=20000;
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable){

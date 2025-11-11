@@ -83,8 +83,6 @@ public class Item {
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
                 ", cantidad=" + cantidad +
-                ", esConsumible=" + esConsumible +
-                ", estadistica=" + estadistica +
                 '}';
     }
 }
