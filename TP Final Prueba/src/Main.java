@@ -36,10 +36,6 @@ public class Main {
         System.out.println(enemigo);
 
 
-
-
-
-
         //inventarios pjs
         Item itemPJ1 = new Item("Pocion de Vida", "Cura una cantidad de vida actual especifica",10, 1, true, 50, E_TipoItem.PUNTOSDEVIDA);
         Item itemPJ2 = new Item("Espada Larga", "Una gran mandoble que aumenta tu daño", 20, 1, false, 60,E_TipoItem.PUNTOSDEATAQUE);
