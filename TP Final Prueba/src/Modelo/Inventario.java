@@ -6,11 +6,14 @@ import Excepciones.NoHayStockEnTiendaException;
 import Excepciones.NoTieneElItemException;
 import Excepciones.NoTienesDineroSuficienteException;
 import Excepciones.PersonajeMuertoException;
+import Interfaces.Jsonable;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventario {
+public class Inventario implements Jsonable {
     HashMap<String,Item> inventario;
 
     public Inventario() {
@@ -139,5 +142,24 @@ public class Inventario {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventario{" +
+                "inventario=" + mostrarInventario() +
+                '}';
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject inventarioJson = new JSONObject();
+        JSONArray contenidoJSon= new JSONArray();
+        for (Map.Entry<String, Item> entry : inventario.entrySet()) {
+            contenidoJSon.put(entry.getKey());
+            contenidoJSon.put(entry.getValue().toJson());
+        }
+        inventarioJson.put("inventario", contenidoJSon);
+        return inventarioJson;
     }
 }
