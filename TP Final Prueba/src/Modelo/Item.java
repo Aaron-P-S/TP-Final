@@ -85,8 +85,6 @@ public class Item implements Jsonable {
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
                 ", cantidad=" + cantidad +
-                ", esConsumible=" + esConsumible +
-                ", estadistica=" + estadistica +
                 '}';
     }
 

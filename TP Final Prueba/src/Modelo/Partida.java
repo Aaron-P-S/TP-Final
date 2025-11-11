@@ -14,7 +14,7 @@ public class Partida {
         this.inventarioTienda = inventarioTienda;
         this.party = party;
         this.enemigos = enemigos;
-        this.dineroDisponible=200;
+        this.dineroDisponible=20000;
 
     }
 
@@ -22,7 +22,7 @@ public class Partida {
 this.inventarioTienda = new Inventario();
 this.party = new ArrayList<>();
 this.enemigos = new ArrayList<>();
-this.dineroDisponible=200;
+this.dineroDisponible=20000;
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable){
@@ -85,9 +85,11 @@ this.dineroDisponible=200;
         return true;
     }
 
-    public String vidaParty(){
+    public String vidaParty(int nivel){
 
-        String S = "         "+party.get(0).getNombre() +"                   "+ party.get(1).getNombre() +"                   "+ party.get(2).getNombre() +"                  "+ party.get(3).getNombre()+"\n" +
+        nivel = (int) nivel/3;
+
+        String S = "         "+party.get(0).getNombre() + " lvl."+nivel +"         "+ party.get(1).getNombre() + " lvl."+nivel +"            "+ party.get(2).getNombre() + " lvl."+nivel +"                "+ party.get(3).getNombre()+ " lvl."+nivel +"\n" +
                 "  | "+party.get(0).getPuntosDeVidaActual() + " ❤️ de " + party.get(0).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(1).getPuntosDeVidaActual() + " ❤️ de " + party.get(1).getPuntosDeVidaMaxima() + " 💖  |  | "+ party.get(2).getPuntosDeVidaActual()  + " ❤️ de " + party.get(2).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(3).getPuntosDeVidaActual() + " ❤️ de " + party.get(3).getPuntosDeVidaMaxima() + " 💖  |";
 
 
