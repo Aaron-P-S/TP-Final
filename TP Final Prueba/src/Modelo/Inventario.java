@@ -1,5 +1,6 @@
 package Modelo;
 
+import Enumeradores.E_Clases;
 import Enumeradores.E_TipoItem;
 import Excepciones.NoHayStockEnTiendaException;
 import Excepciones.NoTieneElItemException;
@@ -62,10 +63,39 @@ public class Inventario {
     public StringBuilder mostrarInventario(){
         StringBuilder inventarioString = new StringBuilder();
         for (Map.Entry<String, Item> entry : inventario.entrySet()) {
-            inventarioString.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            if(entry.getValue().getCantidad()>0) {
+                inventarioString.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            }
         }
         return inventarioString;
     }
+
+    public StringBuilder mostrarInventarioArmeria(PersonajeJugable pj){
+        StringBuilder invetarioArmeria = new StringBuilder();
+        for (Map.Entry<String, Item> entry : inventario.entrySet()) {
+            if(entry.getValue().getNombre().equals("Espada Larga")&&(pj.getClases().equals(E_Clases.GUERRERO))){
+                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            }else if(entry.getValue().getNombre().equals("Baculo de Toth")&&(pj.getClases().equals(E_Clases.MAGO))){
+                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            } else if (entry.getValue().getNombre().equals("Arco Largo")&&(pj.getClases().equals(E_Clases.ARQUERO))) {
+                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            }else if (entry.getValue().getNombre().equals("Maza de Bridas")&&(pj.getClases().equals(E_Clases.BARBARO))){
+                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            }
+        }
+        return invetarioArmeria;
+    }
+
+    public StringBuilder mostrarInventarioAlquimia(){
+        StringBuilder invetarioAlquimia = new StringBuilder();
+        for (Map.Entry<String, Item> entry : inventario.entrySet()) {
+            if(entry.getValue().getTipo().equals(E_TipoItem.PUNTOSDEVIDA)||(entry.getValue().getTipo().equals(E_TipoItem.REVIVIR))) {
+                invetarioAlquimia.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            }
+        }
+        return invetarioAlquimia;
+    }
+
     public boolean usarItem(Item item,PersonajeJugable personajeJugable){
         if(inventario.containsKey(item.getNombre())) {
             if (item.isEsConsumible()) {
