@@ -1,6 +1,11 @@
 import Enumeradores.E_Clases;
 import Enumeradores.E_TipoItem;
+import GestoraJson.GestorJson;
+import JsonUtiles.JsonUtiles;
 import Modelo.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONTokener;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -69,5 +74,15 @@ public class Main {
         Menu menu = new Menu(partida);
         menu.menu();
 
+        try{
+            GestorJson gestorJson= new GestorJson();
+            JSONArray todosAJson=gestorJson.pasarDeArrayAJson(partida.getEnemigos(),partida.getParty(),partida.getInventarioTienda());
+            JsonUtiles.grabarUnJson(todosAJson,"Todos");
+            JSONArray jsonArray= new JSONArray(JsonUtiles.leerUnJson("Todos"));
+            System.out.println(gestorJson.pasarDeJsonAListaEnemigos(jsonArray));
+            System.out.println(gestorJson.pasarDeJsonAParty(jsonArray));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -1,10 +1,13 @@
 package Modelo;
 
 import Enumeradores.E_Clases;
+import Interfaces.Jsonable;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class PersonajeJugable extends Entidad {
+public class PersonajeJugable extends Entidad implements Jsonable {
     E_Clases clases;
     Inventario inventario;
 
@@ -65,5 +68,15 @@ public int atacar(Enemigo enemigo) {
                 + "clases=" + clases
                 + "inventario=" + inventario + "}";
 
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject personajeJugableJson = new JSONObject();
+        personajeJugableJson.put("nombre", getNombre());
+        personajeJugableJson.put("clases", getClases());
+        JSONArray inventarioJson = new JSONArray();
+        personajeJugableJson.put("inventario", inventarioJson);
+        return personajeJugableJson;
     }
 }

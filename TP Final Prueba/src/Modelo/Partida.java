@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Partida {
     // clase para guardar los datos de las distintas partidas
@@ -91,6 +92,17 @@ this.dineroDisponible=200;
 
 
         return S;
+    }
+
+    public ArrayList<Enemigo> getEnemigos() {
+        return enemigos;
+    }
+    public ArrayList<PersonajeJugable> getParty() {
+        return party;
+    }
+
+    public Inventario getInventarioTienda() {
+        return inventarioTienda;
     }
 }
 

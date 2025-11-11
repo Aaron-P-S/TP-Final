@@ -1,8 +1,10 @@
 package Modelo;
 
 import Enumeradores.E_TipoItem;
+import Interfaces.Jsonable;
+import org.json.JSONObject;
 
-public class Item {
+public class Item implements Jsonable {
     private String nombre;
     private String descripcion;
     private double precio;
@@ -86,5 +88,18 @@ public class Item {
                 ", esConsumible=" + esConsumible +
                 ", estadistica=" + estadistica +
                 '}';
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject itemJson= new JSONObject();
+        itemJson.put("nombre", nombre);
+        itemJson.put("descripcion", descripcion);
+        itemJson.put("precio", precio);
+        itemJson.put("cantidad", cantidad);
+        itemJson.put("esConsumible", esConsumible);
+        itemJson.put("estadistica", estadistica);
+        itemJson.put("tipo", tipo);
+        return itemJson;
     }
 }
