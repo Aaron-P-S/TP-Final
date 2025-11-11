@@ -1,16 +1,17 @@
 package Modelo;
 
 import Interfaces.Jsonable;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class Enemigo extends Entidad {
+public class Enemigo extends Entidad implements Jsonable {
 
-    int nivel;
+    private int nivel;
 
     public Enemigo(String nombre, int nivel) {
         super(nombre);
-        this.nivel = nivel;
+        setNivel(nivel);
     }
 
     public int getNivel() {
@@ -19,6 +20,7 @@ public class Enemigo extends Entidad {
 
     public void setNivel(int nivel) {
         this.nivel = nivel;
+        setPuntosDeVidaMaxima(((int) (500 * (1 + (0.5 * nivel)))));
     }
 
     @Override
@@ -35,5 +37,11 @@ public int atacar(PersonajeJugable pj, int nivel){
 }
 
 
-
+    @Override
+    public JSONObject toJson() {
+        JSONObject enemigoJson= new JSONObject();
+        enemigoJson.put("nivel", getNivel());
+        enemigoJson.put("nombre", getNombre());
+        return enemigoJson;
+    }
 }
