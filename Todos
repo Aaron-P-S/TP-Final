@@ -1,0 +1,60 @@
+[
+    {
+        "nivel": 0,
+        "nombre": "Goblin"
+    },
+    {
+        "nivel": 1,
+        "nombre": "Goblin Jefe"
+    },
+    {
+        "nivel": 2,
+        "nombre": "Goblin 2"
+    },
+    {
+        "nivel": 3,
+        "nombre": "Goblin 3"
+    },
+    {
+        "clases": "BARBARO",
+        "nombre": "Pedro",
+        "inventario": []
+    },
+    {
+        "clases": "GUERRERO",
+        "nombre": "Aaron",
+        "inventario": []
+    },
+    {
+        "clases": "MAGO",
+        "nombre": "Jose",
+        "inventario": []
+    },
+    {
+        "clases": "ARQUERO",
+        "nombre": "Juan",
+        "inventario": []
+    },
+    {"inventario": [
+        "Espada Larga",
+        {
+            "descripcion": "Una gran mandoble que aumenta tu daño",
+            "precio": 200,
+            "tipo": "PUNTOSDEATAQUE",
+            "esConsumible": false,
+            "estadistica": 60,
+            "cantidad": 2,
+            "nombre": "Espada Larga"
+        },
+        "Pocion de Vida",
+        {
+            "descripcion": "Cura una cantidad de vida actual especifica",
+            "precio": 10,
+            "tipo": "PUNTOSDEVIDA",
+            "esConsumible": true,
+            "estadistica": 50,
+            "cantidad": 2,
+            "nombre": "Pocion de Vida"
+        }
+    ]}
+]
