@@ -14,31 +14,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventario implements Jsonable {
-    HashMap<String,Item> inventario;
+    HashMap<String, Item> inventario;
 
     public Inventario() {
-        inventario=new HashMap<>();
+        inventario = new HashMap<>();
     }
 
-    public boolean agregarItem(String nombre, Item item){
-        if(!inventario.containsKey(nombre)){
-            inventario.put(nombre,item);
+    public boolean agregarItem(String nombre, Item item) {
+        if (!inventario.containsKey(nombre)) {
+            inventario.put(nombre, item);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public boolean aumentarCantidad(String nombre){
-        if(inventario.containsKey(nombre)){
-            inventario.get(nombre).setCantidad((inventario.get(nombre).getCantidad())+1);
+    public boolean aumentarCantidad(String nombre) {
+        if (inventario.containsKey(nombre)) {
+            inventario.get(nombre).setCantidad((inventario.get(nombre).getCantidad()) + 1);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public int comprarItem(PersonajeJugable personajeJugable, String nombre, int dineroDisponible){
+    public int comprarItem(PersonajeJugable personajeJugable, String nombre, int dineroDisponible) {
         try {
             if (inventario.containsKey(nombre)) {
                 if (dineroDisponible >= inventario.get(nombre).getPrecio()) {
@@ -48,68 +48,68 @@ public class Inventario implements Jsonable {
                         personajeJugable.cambiarCantidad(nombre);
                         System.out.println("💸 ¡¡Compra Realizada!! 💸");
                         return dineroDisponible;
-                    } else{
+                    } else {
                         throw new NoHayStockEnTiendaException("📦 No hay stock de ese item 📦");
                     }
-                }else{
+                } else {
                     throw new NoTienesDineroSuficienteException("🪰 No tienes dinero suficiente para comprar 🪰");
                 }
             }
-        }catch (NoHayStockEnTiendaException e){
+        } catch (NoHayStockEnTiendaException e) {
             System.out.println(e.getMessage());
-        }catch (NoTienesDineroSuficienteException e){
+        } catch (NoTienesDineroSuficienteException e) {
             System.out.println(e.getMessage());
         }
         return dineroDisponible;
     }
 
-    public StringBuilder mostrarInventario(){
+    public StringBuilder mostrarInventario() {
         StringBuilder inventarioString = new StringBuilder();
         for (Map.Entry<String, Item> entry : inventario.entrySet()) {
-            if(entry.getValue().getCantidad()>0) {
+            if (entry.getValue().getCantidad() > 0) {
                 inventarioString.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
             }
         }
         return inventarioString;
     }
 
-    public StringBuilder mostrarInventarioArmeria(PersonajeJugable pj){
+    public StringBuilder mostrarInventarioArmeria(PersonajeJugable pj) {
         StringBuilder invetarioArmeria = new StringBuilder();
         for (Map.Entry<String, Item> entry : inventario.entrySet()) {
-            if(entry.getValue().getNombre().equals("Espada Larga")&&(pj.getClases().equals(E_Clases.GUERRERO))){
-                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
-            }else if(entry.getValue().getNombre().equals("Baculo de Toth")&&(pj.getClases().equals(E_Clases.MAGO))){
-                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
-            } else if (entry.getValue().getNombre().equals("Arco Largo")&&(pj.getClases().equals(E_Clases.ARQUERO))) {
-                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
-            }else if (entry.getValue().getNombre().equals("Maza de Bridas")&&(pj.getClases().equals(E_Clases.BARBARO))){
-                    invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            if (entry.getValue().getNombre().equals("Espada Larga") && (pj.getClases().equals(E_Clases.GUERRERO))) {
+                invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            } else if (entry.getValue().getNombre().equals("Baculo de Toth") && (pj.getClases().equals(E_Clases.MAGO))) {
+                invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            } else if (entry.getValue().getNombre().equals("Arco Largo") && (pj.getClases().equals(E_Clases.ARQUERO))) {
+                invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
+            } else if (entry.getValue().getNombre().equals("Maza de Bridas") && (pj.getClases().equals(E_Clases.BARBARO))) {
+                invetarioArmeria.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
             }
         }
         return invetarioArmeria;
     }
 
-    public StringBuilder mostrarInventarioAlquimia(){
+    public StringBuilder mostrarInventarioAlquimia() {
         StringBuilder invetarioAlquimia = new StringBuilder();
         for (Map.Entry<String, Item> entry : inventario.entrySet()) {
-            if(entry.getValue().getTipo().equals(E_TipoItem.PUNTOSDEVIDA)||(entry.getValue().getTipo().equals(E_TipoItem.REVIVIR))) {
+            if (entry.getValue().getTipo().equals(E_TipoItem.PUNTOSDEVIDA) || (entry.getValue().getTipo().equals(E_TipoItem.REVIVIR))) {
                 invetarioAlquimia.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\n");
             }
         }
         return invetarioAlquimia;
     }
 
-    public boolean usarItem(Item item,PersonajeJugable personajeJugable){
-        if(inventario.containsKey(item.getNombre())) {
+    public boolean usarItem(Item item, PersonajeJugable personajeJugable) {
+        if (inventario.containsKey(item.getNombre())) {
             if (item.isEsConsumible()) {
                 try {
                     if (inventario.get(item.getNombre()).getTipo().equals(E_TipoItem.PUNTOSDEVIDA)) {
                         if (personajeJugable.isVivoOMuerto()) {
-                            if(item.getCantidad()>0) {
+                            if (item.getCantidad() > 0) {
                                 personajeJugable.setPuntosDeVidaActual(personajeJugable.getPuntosDeVidaMaxima());
                                 item.setCantidad(item.getCantidad() - 1);
                                 return true;
-                            }else throw new NoTieneElItemException("No tiene pociones de vida restantes");
+                            } else throw new NoTieneElItemException("No tiene pociones de vida restantes");
                         } else {
                             throw new PersonajeMuertoException("No puede utilizar una pocion de vida en un personaje que esta muerto");
                         }
@@ -117,13 +117,13 @@ public class Inventario implements Jsonable {
                         if (personajeJugable.isVivoOMuerto()) {
                             return false;
                         } else {
-                            if(item.getCantidad()>0) {
+                            if (item.getCantidad() > 0) {
                                 personajeJugable.setVivoOMuerto(true);
                                 personajeJugable.setPuntosDeVidaActual(personajeJugable.getPuntosDeVidaMaxima());
                                 return true;
 
-                            }else throw new NoTieneElItemException("No tiene pociones de resurreccion restantes");
-                            }
+                            } else throw new NoTieneElItemException("No tiene pociones de resurreccion restantes");
+                        }
                     } else if (inventario.get(item.getNombre()).getTipo().equals(E_TipoItem.PUNTOSDEATAQUE)) {
                         if (personajeJugable.isVivoOMuerto()) {
 
@@ -132,10 +132,10 @@ public class Inventario implements Jsonable {
                         }
                         return false;
                     }
-                }catch (PersonajeMuertoException e){
+                } catch (PersonajeMuertoException e) {
                     System.out.println(e.getMessage());
                     return false;
-                }catch (NoTieneElItemException e){
+                } catch (NoTieneElItemException e) {
                     System.out.println(e.getMessage());
                     return false;
                 }
@@ -143,6 +143,7 @@ public class Inventario implements Jsonable {
         }
         return false;
     }
+
 
     @Override
     public String toString() {
@@ -154,7 +155,7 @@ public class Inventario implements Jsonable {
     @Override
     public JSONObject toJson() {
         JSONObject inventarioJson = new JSONObject();
-        JSONArray contenidoJSon= new JSONArray();
+        JSONArray contenidoJSon = new JSONArray();
         for (Map.Entry<String, Item> entry : inventario.entrySet()) {
             contenidoJSon.put(entry.getKey());
             contenidoJSon.put(entry.getValue().toJson());
@@ -162,4 +163,5 @@ public class Inventario implements Jsonable {
         inventarioJson.put("inventario", contenidoJSon);
         return inventarioJson;
     }
+
 }

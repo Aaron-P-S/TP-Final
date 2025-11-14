@@ -32,7 +32,7 @@ public class Enemigo extends Entidad implements Jsonable {
 
 public int atacar(PersonajeJugable pj, int nivel){
         int danoHecho=((int) (50 * (1 + 0.25 * nivel)));
-        pj.setPuntosDeVidaActual(pj.getPuntosDeVidaActual() - danoHecho);
+        pj.setPuntosDeVidaActual( - danoHecho);
         return danoHecho;
 }
 
