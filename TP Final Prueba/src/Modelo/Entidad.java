@@ -20,9 +20,10 @@ public class Entidad {
     }
 
     public void setPuntosDeVidaActual(int puntosDeVida) {
-        if (getPuntosDeVidaActual() + puntosDeVida < puntosDeVidaMaxima) {
-            if (puntosDeVida > 0) {
-                this.puntosDeVidaActual = puntosDeVida;
+        int puntosDeVidaAux= getPuntosDeVidaActual() + puntosDeVida;
+        if (puntosDeVidaAux< puntosDeVidaMaxima) {
+            if (puntosDeVidaAux > 0) {
+                this.puntosDeVidaActual = puntosDeVidaAux;
             } else {
                 setVivoOMuerto(false);
                 puntosDeVidaActual = 0;
