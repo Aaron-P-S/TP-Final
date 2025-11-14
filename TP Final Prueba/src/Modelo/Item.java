@@ -12,7 +12,8 @@ public class Item implements Jsonable {
     private boolean esConsumible;
     private int estadistica;
     private E_TipoItem tipo;
-    public Item(String nombre, String descripcion, double precio, int cantidad, boolean esConsumible, int estadistica,E_TipoItem tipo) {
+
+    public Item(String nombre, String descripcion, double precio, int cantidad, boolean esConsumible, int estadistica, E_TipoItem tipo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -77,7 +78,8 @@ public class Item implements Jsonable {
     public void setEstadistica(int estadistica) {
         this.estadistica = estadistica;
     }
-//modificar para que diga el tipo de item
+
+    //modificar para que diga el tipo de item
     @Override
     public String toString() {
         return "Item{" +
@@ -90,7 +92,7 @@ public class Item implements Jsonable {
 
     @Override
     public JSONObject toJson() {
-        JSONObject itemJson= new JSONObject();
+        JSONObject itemJson = new JSONObject();
         itemJson.put("nombre", nombre);
         itemJson.put("descripcion", descripcion);
         itemJson.put("precio", precio);

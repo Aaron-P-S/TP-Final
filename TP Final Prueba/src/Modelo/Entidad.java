@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Entidad {
+public abstract class Entidad {
 
     private String nombre;
     private int puntosDeVidaActual;
@@ -20,8 +20,8 @@ public class Entidad {
     }
 
     public void setPuntosDeVidaActual(int puntosDeVida) {
-        int puntosDeVidaAux= getPuntosDeVidaActual() + puntosDeVida;
-        if (puntosDeVidaAux< puntosDeVidaMaxima) {
+        int puntosDeVidaAux = getPuntosDeVidaActual() + puntosDeVida;
+        if (puntosDeVidaAux < puntosDeVidaMaxima) {
             if (puntosDeVidaAux > 0) {
                 this.puntosDeVidaActual = puntosDeVidaAux;
             } else {

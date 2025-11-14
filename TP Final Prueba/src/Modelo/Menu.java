@@ -48,23 +48,23 @@ public class Menu {
                         }
                         if (eleccion > 3) throw new NumeroNoValidoException("Se ingreso un numero no valido");
                     } catch (InputMismatchException e) {
-                        System.out.println("No se ingreso un numero, intentelo de nuevo");
-                        eleccion = 0;
+                            System.out.println("No se ingreso un numero, intentelo de nuevo");
+                            eleccion = 0;
                         sc.nextLine();
                     } catch (NumeroNoValidoException e) {
                         System.out.println(e.getMessage());
                         eleccion = 0;
-                        sc.nextLine();
+
                     }
                     break;
                 case 1:
                     try {
                         if (combate()) {
                             System.out.println("Felicidades, a ganado el combate numero " + (nivel + 1));
-                            if (nivel + 1 == partida.enemigos.size()) {
+                            if (nivel + 1 == partida.getEnemigos().size()) {
                                 System.out.println("Felicitaciones a ganado el juego");
-                                winCon=true;
-                                continuar=false;
+                                winCon = true;
+                                continuar = false;
                             }
                         } else {
                             throw new TodosLosMiembrosMuertosException("☠️ Han muerto todos los miembros de la party ☠️" +
@@ -73,10 +73,10 @@ public class Menu {
                         nivel++;
                         if (nivel % 3 == 0) {
                             System.out.println("Felicitaciones! Tu party a subido de nivel");
-                            partida.party.get(0).subirDeNivel(nivel);
-                            partida.party.get(1).subirDeNivel(nivel);
-                            partida.party.get(2).subirDeNivel(nivel);
-                            partida.party.get(3).subirDeNivel(nivel);
+                            partida.getParty().get(0).subirDeNivel(nivel);
+                            partida.getParty().get(1).subirDeNivel(nivel);
+                            partida.getParty().get(2).subirDeNivel(nivel);
+                            partida.getParty().get(3).subirDeNivel(nivel);
                         }
                     } catch (TodosLosMiembrosMuertosException e) {
                         System.out.println(e.getMessage());
@@ -107,24 +107,24 @@ public class Menu {
                                     case 1:
                                         seleccionValida = true;
                                         System.out.println("Ingrese quien desea entrar a la tienda, pues solo de a uno se debe de entrar...");
-                                        System.out.println("1-> " + partida.party.get(0).getNombre() + " | 2->" + partida.party.get(1).getNombre() + "| 3-> " + partida.party.get(2).getNombre() + " | 4-> " + partida.party.get(3).getNombre());
+                                        System.out.println("1-> " + partida.getParty().get(0).getNombre() + " | 2->" + partida.getParty().get(1).getNombre() + "| 3-> " + partida.getParty().get(2).getNombre() + " | 4-> " + partida.getParty().get(3).getNombre());
                                         do {
                                             try {
                                                 switch (sc.nextInt()) {
                                                     case 1:
-                                                        nombre = partida.party.get(0).getNombre();
+                                                        nombre = partida.getParty().get(0).getNombre();
                                                         seleccionValida = true;
                                                         break;
                                                     case 2:
-                                                        nombre = partida.party.get(1).getNombre();
+                                                        nombre = partida.getParty().get(1).getNombre();
                                                         seleccionValida = true;
                                                         break;
                                                     case 3:
-                                                        nombre = partida.party.get(2).getNombre();
+                                                        nombre = partida.getParty().get(2).getNombre();
                                                         seleccionValida = true;
                                                         break;
                                                     case 4:
-                                                        nombre = partida.party.get(3).getNombre();
+                                                        nombre = partida.getParty().get(3).getNombre();
                                                         seleccionValida = true;
                                                         break;
                                                     default:
@@ -163,7 +163,7 @@ public class Menu {
                                                         break;
                                                 }
                                             } while (!seleccionValida);
-                                        }catch (InputMismatchException e){
+                                        } catch (InputMismatchException e) {
                                             System.out.println("No se ingreso un numero, intentelo de nuevo");
                                             seleccionValida = false;
                                             sc.nextLine();
@@ -173,7 +173,7 @@ public class Menu {
                                     case 2:
                                         seleccionValida = true;
                                         System.out.println("Ingrese quien desea entrar a la tienda, pues solo de a uno se debe de entrar...");
-                                        System.out.println("1-> " + partida.party.get(0).getNombre() + " | 2->" + partida.party.get(1).getNombre() + "| 3-> " + partida.party.get(2).getNombre() + " | 4-> " + partida.party.get(3).getNombre());
+                                        System.out.println("1-> " + partida.getParty().get(0).getNombre() + " | 2->" + partida.getParty().get(1).getNombre() + "| 3-> " + partida.getParty().get(2).getNombre() + " | 4-> " + partida.getParty().get(3).getNombre());
 
                                         do {
                                             try {
@@ -182,22 +182,22 @@ public class Menu {
 
                                                 switch (seleccion) {
                                                     case 1:
-                                                        nombre = partida.party.get(0).getNombre();
+                                                        nombre = partida.getParty().get(0).getNombre();
                                                         numeroDePj = 0;
                                                         seleccionValida = true;
                                                         break;
                                                     case 2:
-                                                        nombre = partida.party.get(1).getNombre();
+                                                        nombre = partida.getParty().get(1).getNombre();
                                                         numeroDePj = 1;
                                                         seleccionValida = true;
                                                         break;
                                                     case 3:
-                                                        nombre = partida.party.get(2).getNombre();
+                                                        nombre = partida.getParty().get(2).getNombre();
                                                         numeroDePj = 2;
                                                         seleccionValida = true;
                                                         break;
                                                     case 4:
-                                                        nombre = partida.party.get(3).getNombre();
+                                                        nombre = partida.getParty().get(3).getNombre();
                                                         numeroDePj = 3;
                                                         seleccionValida = true;
                                                         break;
@@ -215,8 +215,8 @@ public class Menu {
 
                                         System.out.println(" +--[♦]==< Bienvenido a LA FORJA DE LOS NUEVE NICOS >==[♦]--+ ");
                                         System.out.println("( ͡° ͜ʖ ͡°) -> Tengo TODO seas un Mago, Arquero, Guerrero o Barbaro! Aqui esta lo que necesitas!");
-                                        System.out.println("Asi que eres un " + partida.party.get(numeroDePj).getClases());
-                                        System.out.println(partida.inventarioTienda.mostrarInventarioArmeria(partida.party.get(numeroDePj)));
+                                        System.out.println("Asi que eres un " + partida.getParty().get(numeroDePj).getClases());
+                                        System.out.println(partida.inventarioTienda.mostrarInventarioArmeria(partida.getParty().get(numeroDePj)));
                                         System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
                                         System.out.println("Desea comprar ese item?: ");
                                         System.out.println("1. Si | 2. No");
@@ -225,18 +225,19 @@ public class Menu {
                                                 switch (sc.nextInt()) {
                                                     case 1:
                                                         seleccionValida = true;
-                                                        if (partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)) {
+                                                        if (partida.getParty().get(numeroDePj).getClases().equals(E_Clases.MAGO)) {
                                                             nombreObjeto = "Baculo de Toth";
-                                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)) {
+                                                        } else if (partida.getParty().get(numeroDePj).getClases().equals(E_Clases.ARQUERO)) {
                                                             nombreObjeto = "Arco Largo";
-                                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)) {
+                                                        } else if (partida.getParty().get(numeroDePj).getClases().equals(E_Clases.GUERRERO)) {
                                                             nombreObjeto = "Espada Larga";
-                                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)) {
+                                                        } else if (partida.getParty().get(numeroDePj).getClases().equals(E_Clases.BARBARO)) {
                                                             nombreObjeto = "Maza de Bridas";
                                                         }
                                                         break;
                                                     case 2:
-                                                        nombreObjeto = "null";
+                                                        nombreObjeto = null;
+                                                        seleccionValida = true;
                                                         break;
                                                     default:
                                                         System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
@@ -245,7 +246,7 @@ public class Menu {
                                                         break;
                                                 }
                                             } while (!seleccionValida);
-                                        }catch (InputMismatchException e){
+                                        } catch (InputMismatchException e) {
                                             System.out.println("No se ingreso un numero, intentelo de nuevo");
                                             seleccionValida = false;
                                             sc.nextLine();
@@ -281,13 +282,13 @@ public class Menu {
                                 flag = sc.nextInt();
                                 sc.nextLine();
                                 seleccionValida2 = true;
-                            }catch (InputMismatchException e){
+                            } catch (InputMismatchException e) {
                                 System.out.println("No se ingreso un numero, intentelo de nuevo");
-                                seleccionValida2=false;
+                                seleccionValida2 = false;
                                 sc.nextLine();
                             }
 
-                        }while (seleccionValida2==false);
+                        } while (seleccionValida2 == false);
                     } while (flag == 1);
                     eleccion = 0;
                     break;
@@ -303,13 +304,13 @@ public class Menu {
         int eleccionCombate = 0;
         int turno = 0;
         Scanner sc = new Scanner(System.in);
-        while (partida.estadoParty() && partida.enemigos.get(nivel).isVivoOMuerto()) {
+        while (partida.estadoParty() && partida.getEnemigos().get(nivel).isVivoOMuerto()) {
             switch (eleccionCombate) {
                 case 0:
                     System.out.println("+-👾👾👾------------------------------------------------+");
                     System.out.println(partida.vidaParty(nivel));
                     System.out.println("+--------------------------------------------------------+");
-                    System.out.println("Es el turno de " + partida.party.get(turno).getNombre());
+                    System.out.println("Es el turno de " + partida.getParty().get(turno).getNombre());
                     System.out.println("""
                             Ingrese un numero segun la accion que quiera realizar en el combate:
                             | 1. atacar |  | 2. Inventario  |
@@ -335,17 +336,17 @@ public class Menu {
                 case 1:
                     //atacar
 
-                    if (!partida.party.get(turno).isVivoOMuerto()) {
+                    if (!partida.getParty().get(turno).isVivoOMuerto()) {
                         System.out.println("+-----------------------☠️---------------------------+");
-                        System.out.println(partida.party.get(turno).getNombre() + " esta muerto, se salteara su turno ");
+                        System.out.println(partida.getParty().get(turno).getNombre() + " esta muerto, se salteara su turno ");
                     } else {
-                        int valorAtaque = partida.party.get(turno).atacar(partida.enemigos.get(nivel));
-                        System.out.println(partida.party.get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
-                        System.out.println(partida.enemigos.get(nivel).getNombre() + " tiene " + partida.enemigos.get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");
+                        int valorAtaque = partida.getParty().get(turno).atacar(partida.getEnemigos().get(nivel));
+                        System.out.println(partida.getParty().get(turno).getNombre() + " atacara por " + valorAtaque + "☄️");
+                        System.out.println(partida.getEnemigos().get(nivel).getNombre() + " tiene " + partida.getEnemigos().get(nivel).getPuntosDeVidaActual() + " ❤️ puntos de vida restantes ️");
 
                     }
                     turno++;
-                    if (turno + 1 > partida.party.size()) {
+                    if (turno + 1 > partida.getParty().size()) {
                         int numeroRandom = (int) (Math.random() * 101);
                         int eleccionEnemigo = 0;
                         System.out.println(numeroRandom);
@@ -358,18 +359,18 @@ public class Menu {
                         } else if (numeroRandom < 100) {
                             eleccionEnemigo = 3;
                         }
-                        if (!partida.party.get(eleccionEnemigo).isVivoOMuerto()) {
-                            while (!partida.party.get(eleccionEnemigo).isVivoOMuerto()) {
-                                if (eleccionEnemigo > partida.party.size()) eleccionEnemigo++;
+                        if (!partida.getParty().get(eleccionEnemigo).isVivoOMuerto()) {
+                            while (!partida.getParty().get(eleccionEnemigo).isVivoOMuerto()) {
+                                if (eleccionEnemigo > partida.getParty().size()) eleccionEnemigo++;
                                 else eleccionEnemigo--;
                             }
 
                         }
-                        int danoHecho = partida.enemigos.get(nivel).atacar(partida.party.get(eleccionEnemigo), nivel);
+                        int danoHecho = partida.getEnemigos().get(nivel).atacar(partida.getParty().get(eleccionEnemigo), nivel);
                         System.out.println("+-----------------------⚔️---------------------------+");
-                        System.out.println(partida.enemigos.get(nivel).getNombre() + " ataco a " + partida.party.get(eleccionEnemigo).getNombre() + " por " + danoHecho + " de dano ☄️");
+                        System.out.println(partida.getEnemigos().get(nivel).getNombre() + " ataco a " + partida.getParty().get(eleccionEnemigo).getNombre() + " por " + danoHecho + " de dano ☄️");
                         System.out.println("+----------------------------------------------------+");
-                        System.out.println("La vida actual de " + partida.party.get(eleccionEnemigo).getNombre() + " es " + partida.party.get(eleccionEnemigo).getPuntosDeVidaActual() + " ❤️");
+                        System.out.println("La vida actual de " + partida.getParty().get(eleccionEnemigo).getNombre() + " es " + partida.getParty().get(eleccionEnemigo).getPuntosDeVidaActual() + " ❤️");
                         turno = 0;
                     }
                     eleccionCombate = 0;
@@ -382,14 +383,14 @@ public class Menu {
                     try {
                         switch (sc.nextInt()) {
                             case 1:
-                                if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Vida"), partida.party.get(turno))) {
+                                if (partida.getParty().get(turno).inventario.usarItem(partida.getParty().get(turno).inventario.inventario.get("Pocion de Vida"), partida.getParty().get(turno))) {
                                     turno++;
                                 } else {
                                     System.out.println();
                                 }
                                 break;
                             case 2:
-                                if (partida.party.get(turno).inventario.usarItem(partida.party.get(turno).inventario.inventario.get("Pocion de Revivir"), partida.party.get(turno))) {
+                                if (partida.getParty().get(turno).inventario.usarItem(partida.getParty().get(turno).inventario.inventario.get("Pocion de Revivir"), partida.getParty().get(turno))) {
                                     turno++;
                                 } else {
                                     System.out.println("El personaje que se quiere revivir esta vivo");
@@ -423,16 +424,16 @@ public class Menu {
     }
 
     public void usarHabilidad(Enemigo enemigo) {
-        if (partida.party.get(nivel).getClases().equals(E_Clases.GUERRERO)) {
-            partida.party.get(nivel).atacar(enemigo);
-        } else if (partida.party.get(nivel).getClases().equals(E_Clases.MAGO)) {
-            partida.party.get(0).setPuntosDeVidaActual(partida.party.get(0).getPuntosDeVidaActual() + 25);
-            partida.party.get(1).setPuntosDeVidaActual(partida.party.get(1).getPuntosDeVidaActual() + 25);
-            partida.party.get(2).setPuntosDeVidaActual(partida.party.get(2).getPuntosDeVidaActual() + 25);
-            partida.party.get(3).setPuntosDeVidaActual(partida.party.get(3).getPuntosDeVidaActual() + 25);
-        } else if (partida.party.get(nivel).getClases().equals(E_Clases.ARQUERO)) {
+        if (partida.getParty().get(nivel).getClases().equals(E_Clases.GUERRERO)) {
+            partida.getParty().get(nivel).atacar(enemigo);
+        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.MAGO)) {
+            partida.getParty().get(0).setPuntosDeVidaActual(partida.getParty().get(0).getPuntosDeVidaActual() + 25);
+            partida.getParty().get(1).setPuntosDeVidaActual(partida.getParty().get(1).getPuntosDeVidaActual() + 25);
+            partida.getParty().get(2).setPuntosDeVidaActual(partida.getParty().get(2).getPuntosDeVidaActual() + 25);
+            partida.getParty().get(3).setPuntosDeVidaActual(partida.getParty().get(3).getPuntosDeVidaActual() + 25);
+        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.ARQUERO)) {
             partida.setDineroDisponible(partida.getDineroDisponible() + ((int) (25 * (1 + 0.25 * nivel))));
-        } else if (partida.party.get(nivel).getClases().equals(E_Clases.BARBARO)) {
+        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.BARBARO)) {
 //inmortalidad por dos turnos
         }
     }
