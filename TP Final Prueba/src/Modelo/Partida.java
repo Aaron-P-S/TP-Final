@@ -5,40 +5,36 @@ import java.util.HashMap;
 
 public class Partida {
     // clase para guardar los datos de las distintas partidas
+
+    // INVENTARIO TIENDA
     Inventario inventarioTienda;
-    ArrayList<PersonajeJugable> party;
-    ArrayList<Enemigo> enemigos;
+    //GENERICOS
+    GestorGenerico<PersonajeJugable> party;
+    GestorGenerico<Enemigo> enemigos;
+
     private int dineroDisponible;
 
-    public Partida(Inventario inventarioTienda, ArrayList<PersonajeJugable> party, ArrayList<Enemigo> enemigos) {
-        this.inventarioTienda = inventarioTienda;
-        this.party = party;
-        this.enemigos = enemigos;
-        this.dineroDisponible=20000;
-
+    public Partida() {
+        this.inventarioTienda = new Inventario();
+        this.party = new GestorGenerico<>();
+        this.enemigos = new GestorGenerico<>();
+        this.dineroDisponible = 20000;
     }
 
-    public Partida(){
-this.inventarioTienda = new Inventario();
-this.party = new ArrayList<>();
-this.enemigos = new ArrayList<>();
-this.dineroDisponible=20000;
-    }
-
-    public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable){
-        party.add(personajeJugable);
+    public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable) {
+        party.agregar(personajeJugable);
         return true;
 
     }
 
-    public boolean agregarEnemigo(Enemigo enemigo){
-        enemigos.add(enemigo);
+    public boolean agregarEnemigo(Enemigo enemigo) {
+        enemigos.agregar(enemigo);
         return true;
     }
 
-    public StringBuilder mostrarParty(){
+    public StringBuilder mostrarParty() {
         StringBuilder partyString = new StringBuilder();
-        for (PersonajeJugable pj : party) {
+        for (PersonajeJugable pj : party.getLista()) {
             partyString.append(pj.toString()).append("\n");
         }
         return partyString;
@@ -47,25 +43,25 @@ this.dineroDisponible=20000;
 
     public StringBuilder mostrarEnemigos() {
         StringBuilder enemigosString = new StringBuilder();
-        for (Enemigo e: enemigos){
+        for (Enemigo e : enemigos.getLista()) {
             enemigosString.append(e.toString()).append("\n");
         }
         return enemigosString;
     }
 
-    public boolean estadoParty(){
+    public boolean estadoParty() {
         boolean estado = false;
-        for (PersonajeJugable pj : party) {
-            if(pj.isVivoOMuerto()){
+        for (PersonajeJugable pj : party.getLista()) {
+            if (pj.isVivoOMuerto()) {
                 return true;
             }
         }
         return estado;
     }
 
-    public PersonajeJugable getPersonajeJugable(String nombre){
-        for (PersonajeJugable pj : party){
-            if(pj.getNombre().equals(nombre)){
+    public PersonajeJugable getPersonajeJugable(String nombre) {
+        for (PersonajeJugable pj : party.getLista()) {
+            if (pj.getNombre().equals(nombre)) {
                 return pj;
             }
         }
@@ -80,25 +76,28 @@ this.dineroDisponible=20000;
         this.dineroDisponible = dineroDisponible;
     }
 
-    public boolean agregarTienda(Inventario inventario){
+    public boolean agregarTienda(Inventario inventario) {
         this.inventarioTienda = inventario;
         return true;
     }
 
-    public String vidaParty(int nivel){
+    public String vidaParty(int nivel) {
 
-        nivel = (int) nivel/3;
+        nivel = (int) nivel / 3;
 
-        String S = "         "+party.get(0).getNombre() + " lvl."+nivel +"         "+ party.get(1).getNombre() + " lvl."+nivel +"            "+ party.get(2).getNombre() + " lvl."+nivel +"                "+ party.get(3).getNombre()+ " lvl."+nivel +"\n" +
-                "  | "+party.get(0).getPuntosDeVidaActual() + " ❤️ de " + party.get(0).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(1).getPuntosDeVidaActual() + " ❤️ de " + party.get(1).getPuntosDeVidaMaxima() + " 💖  |  | "+ party.get(2).getPuntosDeVidaActual()  + " ❤️ de " + party.get(2).getPuntosDeVidaMaxima() +" 💖  |  | "+ party.get(3).getPuntosDeVidaActual() + " ❤️ de " + party.get(3).getPuntosDeVidaMaxima() + " 💖  |";
+        ArrayList<PersonajeJugable> partyLista = party.getLista();
+
+        String S = "         " + partyLista.get(0).getNombre() + " lvl." + nivel + "         " + partyLista.get(1).getNombre() + " lvl." + nivel + "            " + partyLista.get(2).getNombre() + " lvl." + nivel + "                " + partyLista.get(3).getNombre() + " lvl." + nivel + "\n" +
+                "  | " + partyLista.get(0).getPuntosDeVidaActual() + " ❤️ de " + partyLista.get(0).getPuntosDeVidaMaxima() + " 💖  |  | " + partyLista.get(1).getPuntosDeVidaActual() + " ❤️ de " + partyLista.get(1).getPuntosDeVidaMaxima() + " 💖  |  | " + partyLista.get(2).getPuntosDeVidaActual() + " ❤️ de " + partyLista.get(2).getPuntosDeVidaMaxima() + " 💖  |  | " + partyLista.get(3).getPuntosDeVidaActual() + " ❤️ de " + partyLista.get(3).getPuntosDeVidaMaxima() + " 💖  |";
         return S;
     }
 
     public ArrayList<Enemigo> getEnemigos() {
-        return enemigos;
+        return enemigos.getLista();
     }
+
     public ArrayList<PersonajeJugable> getParty() {
-        return party;
+        return party.getLista();
     }
 
     public Inventario getInventarioTienda() {
