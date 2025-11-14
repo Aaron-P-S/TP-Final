@@ -42,11 +42,11 @@ public class Menu {
                             """);
                     try {
                         eleccion = sc.nextInt();
+                        sc.nextLine();
                         if (eleccion < 0) {
                             throw new NumeroNoValidoException("Se ingreso un numero negativo");
                         }
                         if (eleccion > 3) throw new NumeroNoValidoException("Se ingreso un numero no valido");
-                        sc.nextLine();
                     } catch (InputMismatchException e) {
                         System.out.println("No se ingreso un numero, intentelo de nuevo");
                         eleccion = 0;
@@ -94,6 +94,7 @@ public class Menu {
                     int numeroDePj = 0;
                     int seleccion;
                     boolean seleccionValida = false;
+                    boolean seleccionValida2 = false;
                     do {
                         System.out.println("+-🛍️🛍️🛍️------------------------------------------------+");
                         System.out.println("Bienvenido a la Plaza de los Gremios!");
@@ -136,7 +137,6 @@ public class Menu {
                                                 System.out.println("No se escribio un numero, intentelo de nuevo");
                                                 seleccionValida = false;
                                                 sc.nextLine();
-                                                break;
                                             }
                                         } while (!seleccionValida);
                                         System.out.println(" °º¤ø,¸Bienvenido a La tienda del maestro Emma¸,ø¤º° ");
@@ -145,23 +145,29 @@ public class Menu {
                                         System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
                                         System.out.println("Ingrese el item que desea comprar: ");
                                         System.out.println("1. Pocion de Vida 2. Pocion de Revivir");
-                                        do {
-                                            switch (sc.nextInt()) {
-                                                case 1:
-                                                    seleccionValida = true;
-                                                    nombreObjeto = "Pocion de Vida";
-                                                    break;
-                                                case 2:
-                                                    seleccionValida = true;
-                                                    nombreObjeto = "Pocion de Revivir";
-                                                    break;
-                                                default:
-                                                    seleccionValida = false;
-                                                    System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
-                                                    sc.nextLine();
-                                                    break;
-                                            }
-                                        } while (!seleccionValida);
+                                        try {
+                                            do {
+                                                switch (sc.nextInt()) {
+                                                    case 1:
+                                                        seleccionValida = true;
+                                                        nombreObjeto = "Pocion de Vida";
+                                                        break;
+                                                    case 2:
+                                                        seleccionValida = true;
+                                                        nombreObjeto = "Pocion de Revivir";
+                                                        break;
+                                                    default:
+                                                        seleccionValida = false;
+                                                        System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                                        sc.nextLine();
+                                                        break;
+                                                }
+                                            } while (!seleccionValida);
+                                        }catch (InputMismatchException e){
+                                            System.out.println("No se ingreso un numero, intentelo de nuevo");
+                                            seleccionValida = false;
+                                            sc.nextLine();
+                                        }
 
                                         break;
                                     case 2:
@@ -202,6 +208,7 @@ public class Menu {
                                                 }
                                             } catch (java.util.InputMismatchException e) {
                                                 System.out.println("Entrada no válida. ");
+                                                seleccionValida = false;
                                                 sc.nextLine();
                                             }
                                         } while (!seleccionValida);
@@ -213,59 +220,36 @@ public class Menu {
                                         System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
                                         System.out.println("Desea comprar ese item?: ");
                                         System.out.println("1. Si | 2. No");
-                                        do {
-                                            switch (sc.nextInt()) {
-                                                case 1:
-                                                    seleccionValida = true;
-                                                    if (partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)) {
-                                                        nombreObjeto = "Baculo de Toth";
-                                                    } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)) {
-                                                        nombreObjeto = "Arco Largo";
-                                                    } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)) {
-                                                        nombreObjeto = "Espada Larga";
-                                                    } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)) {
-                                                        nombreObjeto = "Maza de Bridas";
-                                                    }
-                                                    break;
-                                                case 2:
-                                                    nombreObjeto = "null";
-                                                    break;
-                                                default:
-                                                    System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
-                                                    sc.nextLine();
-                                                    seleccionValida = false;
-                                                    break;
-                                            }
-                                        } while (!seleccionValida);
-//
-//                                        System.out.println(" +--[♦]==< Bienvenido a LA FORJA DE LOS NUEVE NICOS >==[♦]--+ ");
-//                                        System.out.println("( ͡° ͜ʖ ͡°) -> Tengo TODO seas un Mago, Arquero, Guerrero o Barbaro! Aqui esta lo que necesitas!");
-//                                        System.out.println("Asi que eres un " + partida.party.get(numeroDePj).getClases());
-//                                        System.out.println(partida.inventarioTienda.mostrarInventarioArmeria(partida.party.get(numeroDePj)));
-//                                        System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
-//                                        System.out.println("Desea comprar ese item?: ");
-//                                        System.out.println("1. Si | 2. No");
-//                                        sc.nextLine();
-//                                        switch (sc.nextInt()) {
-//                                            case 1:
-//                                                if (partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)) {
-//                                                    nombreObjeto = "Baculo de Toth";
-//                                                } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)) {
-//                                                    nombreObjeto = "Arco Largo";
-//                                                } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)) {
-//                                                    nombreObjeto = "Espada Larga";
-//                                                } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)) {
-//                                                    nombreObjeto = "Maza de Bridas";
-//                                                }
-//                                                break;
-//                                            case 2:
-//                                                nombreObjeto = "null";
-//                                                break;
-//                                            default:
-//                                                System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
-//                                                sc.nextLine();
-//                                                break;
-//                                        }
+                                        try {
+                                            do {
+                                                switch (sc.nextInt()) {
+                                                    case 1:
+                                                        seleccionValida = true;
+                                                        if (partida.party.get(numeroDePj).getClases().equals(E_Clases.MAGO)) {
+                                                            nombreObjeto = "Baculo de Toth";
+                                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.ARQUERO)) {
+                                                            nombreObjeto = "Arco Largo";
+                                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.GUERRERO)) {
+                                                            nombreObjeto = "Espada Larga";
+                                                        } else if (partida.party.get(numeroDePj).getClases().equals(E_Clases.BARBARO)) {
+                                                            nombreObjeto = "Maza de Bridas";
+                                                        }
+                                                        break;
+                                                    case 2:
+                                                        nombreObjeto = "null";
+                                                        break;
+                                                    default:
+                                                        System.out.println("Se ingreso un numero no valido, intentelo de nuevo");
+                                                        sc.nextLine();
+                                                        seleccionValida = false;
+                                                        break;
+                                                }
+                                            } while (!seleccionValida);
+                                        }catch (InputMismatchException e){
+                                            System.out.println("No se ingreso un numero, intentelo de nuevo");
+                                            seleccionValida = false;
+                                            sc.nextLine();
+                                        }
                                         break;
                                     case 3:
                                         // guardar los datos al salir
@@ -279,6 +263,7 @@ public class Menu {
                                 }
                             } catch (InputMismatchException e) {
                                 System.out.println("No se ingreso un numero, intentelo de nuevo");
+                                seleccionValida = false;
                                 sc.nextLine();
                             }
                         } while (!seleccionValida);
@@ -290,9 +275,22 @@ public class Menu {
                         System.out.println(partida.getPersonajeJugable(nombre).mostrarInventario());
                         System.out.println("+----------------------------------------------------+");
                         System.out.println("Desea volver a la Plaza de los Gremios? ");
-                        System.out.println("| 1. Si | | 2. No |");
-                        flag = sc.nextInt();
+                        System.out.println("| Ingrese 1 para volver o ingrese cualquier numero para salir |");
+                        do {
+                            try {
+                                flag = sc.nextInt();
+                                sc.nextLine();
+                                seleccionValida2 = true;
+                            }catch (InputMismatchException e){
+                                System.out.println("No se ingreso un numero, intentelo de nuevo");
+                                seleccionValida2=false;
+                                sc.nextLine();
+                            }
+
+                        }while (seleccionValida2==false);
                     } while (flag == 1);
+                    eleccion = 0;
+                    break;
                 case 3:
                     continuar = false;
                     break;

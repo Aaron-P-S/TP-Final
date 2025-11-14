@@ -16,30 +16,6 @@
         "nombre": "Goblin Jefe"
     },
     {
-        "nivel": 4,
-        "nombre": "Goblin Caudillo"
-    },
-    {
-        "nivel": 6,
-        "nombre": "Goblin Caudillo 2"
-    },
-    {
-        "nivel": 7,
-        "nombre": "Goblin Caudillo 3"
-    },
-    {
-        "nivel": 8,
-        "nombre": "Goblin Caudillo 4"
-    },
-    {
-        "nivel": 9,
-        "nombre": "Goblin Caudillo 5"
-    },
-    {
-        "nivel": 10,
-        "nombre": "Goblin Caudillo 6"
-    },
-    {
         "clases": "BARBARO",
         "nombre": "Pedro",
         "inventario": {"inventario": [
