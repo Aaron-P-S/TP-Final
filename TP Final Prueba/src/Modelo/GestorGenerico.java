@@ -11,8 +11,11 @@ public class GestorGenerico<T> {
     }
 
     public boolean agregar(T elemento) {
-        coleccionGenerica.add(elemento);
-        return true;
+        if(coleccionGenerica.contains(elemento)) {
+            return false;
+        }else {
+            return coleccionGenerica.add(elemento);
+        }
     }
 
     public T obtener(int indice) {
@@ -22,6 +25,7 @@ public class GestorGenerico<T> {
             return null;
         }
     }
+
 
     public ArrayList<T> getLista() {
         return coleccionGenerica;

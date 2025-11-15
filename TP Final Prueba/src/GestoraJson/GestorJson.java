@@ -1,8 +1,10 @@
 package GestoraJson;
 
 import Enumeradores.E_Clases;
+import Enumeradores.E_TipoItem;
 import Modelo.Enemigo;
 import Modelo.Inventario;
+import Modelo.Item;
 import Modelo.PersonajeJugable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,20 +32,45 @@ public class GestorJson {
         ArrayList<Enemigo> enemigos = new ArrayList<>();
         for (int i = 0; i < listaTodos.length(); i++) {
             if (listaTodos.getJSONObject(i).has("nivel")) {
-                Enemigo enemigo = new Enemigo(listaTodos.getJSONObject(i).getString("nombre"), listaTodos.getJSONObject(i).getInt("nivel"));
+                Enemigo enemigo = new Enemigo(listaTodos.getJSONObject(i).getString("nombre"), listaTodos.getJSONObject(i).getInt("nivel"), listaTodos.getJSONObject(i).getInt("puntosDeVidaMaxima"), listaTodos.getJSONObject(i).getInt("puntosDeVidaActual"));
                 enemigos.add(enemigo);
             }
         }
         return enemigos;
     }
-    public ArrayList<PersonajeJugable> pasarDeJsonAParty(JSONArray listaTodos){
+
+    public ArrayList<PersonajeJugable> pasarDeJsonAParty(JSONArray listaTodos) {
         ArrayList<PersonajeJugable> jugadores = new ArrayList<>();
         for (int i = 0; i < listaTodos.length(); i++) {
-            if(listaTodos.getJSONObject(i).has("clases")){
-                PersonajeJugable personajeJugable= new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"),(E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases")) ));
+            if (listaTodos.getJSONObject(i).has("clases")) {
+                PersonajeJugable personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"), (E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases"))));
                 jugadores.add(personajeJugable);
             }
         }
         return jugadores;
     }
-}
+
+    public Inventario pasarDeJsonAInventario(JSONObject inventarioJson) {
+        Inventario inv = new Inventario();
+
+        JSONObject contenido = inventarioJson.getJSONObject("inventario");
+
+        for (String key : contenido.keySet()) {
+            JSONObject itemJson = contenido.getJSONObject(key);
+            Item item = new Item(itemJson.getString("nombre"),itemJson.getString("descripcion"),itemJson.getDouble("precio"),itemJson.getInt("cantidad"),itemJson.getBoolean("esConsumible"),itemJson.getInt("estadistica"),E_TipoItem.valueOf(itemJson.getString("tipo")));
+            inv.agregarItem(key, item);
+        }
+
+        return inv;
+    }
+    public Inventario pasarDeJsonAInventario(JSONArray listaTodos) {
+        for (int i = 0; i < listaTodos.length(); i++) {
+            JSONObject obj = listaTodos.getJSONObject(i);
+            if (obj.has("inventario")&&!obj.has("nombre")) {
+                return pasarDeJsonAInventario(obj); // llama al método existente
+            }
+        }
+        return new Inventario(); // vacío si no se encontró
+    }
+    }
+

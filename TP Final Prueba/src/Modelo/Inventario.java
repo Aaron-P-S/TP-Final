@@ -126,7 +126,7 @@ public class Inventario implements Jsonable {
                         }
                     } else if (inventario.get(item.getNombre()).getTipo().equals(E_TipoItem.PUNTOSDEATAQUE)) {
                         if (personajeJugable.isVivoOMuerto()) {
-
+                            System.out.println("Trabajo en proceso");
                         } else {
                             throw new PersonajeMuertoException("No se puede utilizar una pocion de poder en un personaje que esta muerto");
                         }
@@ -152,15 +152,20 @@ public class Inventario implements Jsonable {
                 '}';
     }
 
+    public HashMap<String, Item> getInventario() {
+        return inventario;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject inventarioJson = new JSONObject();
-        JSONArray contenidoJSon = new JSONArray();
+        JSONObject contenido = new JSONObject();
+
         for (Map.Entry<String, Item> entry : inventario.entrySet()) {
-            contenidoJSon.put(entry.getKey());
-            contenidoJSon.put(entry.getValue().toJson());
+            contenido.put(entry.getKey(), entry.getValue().toJson());
         }
-        inventarioJson.put("inventario", contenidoJSon);
+
+        inventarioJson.put("inventario", contenido);
         return inventarioJson;
     }
 

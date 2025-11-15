@@ -5,6 +5,7 @@ import Interfaces.Jsonable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PersonajeJugable extends Entidad implements Jsonable {
@@ -24,15 +25,16 @@ public class PersonajeJugable extends Entidad implements Jsonable {
 
     public int atacar(Enemigo enemigo) {
         if (getClases().equals(E_Clases.GUERRERO)) {
-            if (inventario.inventario.containsKey("Espada Larga")) {
+            if (inventario.inventario.containsKey("Espada Larga")&&inventario.inventario.get("Espada Larga").getCantidad() > 0) {
                 enemigo.setPuntosDeVidaActual(-E_Clases.GUERRERO.getDano() * 2);
                 return E_Clases.GUERRERO.getDano() * 2;
             } else {
-                enemigo.setPuntosDeVidaActual(-E_Clases.GUERRERO.getDano());
-                return E_Clases.GUERRERO.getDano();
+                    enemigo.setPuntosDeVidaActual(-E_Clases.GUERRERO.getDano());
+                    return E_Clases.GUERRERO.getDano();
+                }
             }
-        } else if (getClases().equals(E_Clases.MAGO)) {
-            if (inventario.inventario.containsKey("Baculo de Toth")) {
+         else if (getClases().equals(E_Clases.MAGO)) {
+            if (inventario.inventario.containsKey("Baculo de Toth")&&inventario.inventario.get("Baculo de Toth").getCantidad() > 0) {
                 enemigo.setPuntosDeVidaActual(-E_Clases.MAGO.getDano() * 5);
                 return E_Clases.MAGO.getDano() * 5;
             } else {
@@ -40,18 +42,19 @@ public class PersonajeJugable extends Entidad implements Jsonable {
                 return E_Clases.MAGO.getDano();
             }
         } else if (getClases().equals(E_Clases.ARQUERO)) {
-            if (inventario.inventario.containsKey("Arco Largo")) {
+            if (inventario.inventario.containsKey("Arco Largo")&&inventario.inventario.get("Arco Largo").getCantidad() > 0) {
                 enemigo.setPuntosDeVidaActual(-E_Clases.ARQUERO.getDano() * 3);
                 return E_Clases.ARQUERO.getDano() * 3;
+            }else {
+                enemigo.setPuntosDeVidaActual(-E_Clases.ARQUERO.getDano());
+                return E_Clases.ARQUERO.getDano();
             }
-            enemigo.setPuntosDeVidaActual(-E_Clases.ARQUERO.getDano());
-            return E_Clases.ARQUERO.getDano();
         } else if (getClases().equals(E_Clases.BARBARO)) {
-            if (inventario.inventario.containsKey("Maza de Bridas")) {
-                setPuntosDeVidaActual(20);
-                enemigo.setPuntosDeVidaActual(-E_Clases.BARBARO.getDano() * 2);
-                return E_Clases.BARBARO.getDano() * 2;
-            } else {
+            if (inventario.inventario.containsKey("Maza de Bridas")&&inventario.inventario.get("Maza de Bridas").getCantidad()>0) {
+                    setPuntosDeVidaActual(20);
+                    enemigo.setPuntosDeVidaActual(-E_Clases.BARBARO.getDano() * 2);
+                    return E_Clases.BARBARO.getDano() * 2;
+                } else {
                 enemigo.setPuntosDeVidaActual(-E_Clases.BARBARO.getDano());
                 return E_Clases.BARBARO.getDano();
             }
@@ -76,6 +79,20 @@ public class PersonajeJugable extends Entidad implements Jsonable {
     public void subirDeNivel(int nivel) {
         setPuntosDeVidaMaxima(((int) (getPuntosDeVidaMaxima() * (1 + 0.15 * nivel))));
         setVivoOMuerto(true);
+    }
+    public void agregarInventario(ArrayList<Item> inventarioAgregar) {
+        for (Item item : inventarioAgregar) {
+            agregarInventario(item.getNombre(), item);
+        }
+    }
+    public void agregarInventario(Inventario inventarioAgregar){
+        for(String clave:inventarioAgregar.inventario.keySet()){
+            inventario.inventario.put(clave,inventarioAgregar.inventario.get(clave));
+        }
+    }
+
+    public Inventario getInventario() {
+        return inventario;
     }
 
     @Override

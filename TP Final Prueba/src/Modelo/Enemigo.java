@@ -9,9 +9,17 @@ public class Enemigo extends Entidad implements Jsonable {
 
     private int nivel;
 
-    public Enemigo(String nombre, int nivel) {
+    public Enemigo(String nombre, int nivel, int puntosDeVidaMaxima) {
         super(nombre);
         setNivel(nivel);
+        setPuntosDeVidaMaxima(puntosDeVidaMaxima);
+    }
+
+    public Enemigo(String nombre, int nivel, int puntosDeVidaMaxima,int puntosDeVidaActual) {
+        super(nombre);
+        this.nivel = nivel;
+        setPuntosDeVidaMaxima(puntosDeVidaMaxima);
+        setPuntosDeVidaActual(puntosDeVidaActual);
     }
 
     public int getNivel() {
@@ -42,6 +50,8 @@ public int atacar(PersonajeJugable pj, int nivel){
         JSONObject enemigoJson= new JSONObject();
         enemigoJson.put("nivel", getNivel());
         enemigoJson.put("nombre", getNombre());
+        enemigoJson.put("puntosDeVidaMaxima", getPuntosDeVidaMaxima());
+        enemigoJson.put("puntosDeVidaActual",getPuntosDeVidaActual());
         return enemigoJson;
     }
 }

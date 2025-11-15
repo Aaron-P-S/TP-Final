@@ -1,36 +1,42 @@
 [
     {
+        "puntosDeVidaMaxima": 500,
         "nivel": 0,
-        "nombre": "Pequeño Goblin"
+        "nombre": "Pequeño Goblin",
+        "puntosDeVidaActual": 500
     },
     {
+        "puntosDeVidaMaxima": 1000,
         "nivel": 1,
-        "nombre": "Goblin"
+        "nombre": "Goblin",
+        "puntosDeVidaActual": 1000
     },
     {
+        "puntosDeVidaMaxima": 2000,
         "nivel": 2,
-        "nombre": "Goblin Luchador"
+        "nombre": "Goblin Luchador",
+        "puntosDeVidaActual": 2000
     },
     {
+        "puntosDeVidaMaxima": 3000,
         "nivel": 3,
-        "nombre": "Goblin Jefe"
+        "nombre": "Goblin Jefe",
+        "puntosDeVidaActual": 3000
     },
     {
         "clases": "BARBARO",
         "nombre": "Pedro",
-        "inventario": {"inventario": [
-            "Espada Larga",
-            {
+        "inventario": {"inventario": {
+            "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
                 "precio": 20,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 60,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Espada Larga"
             },
-            "Pocion de Revivir",
-            {
+            "Pocion de Revivir": {
                 "descripcion": "Una increible pocion que tiene la capacidad de traer del mundo de los muertos a su portador",
                 "precio": 600,
                 "tipo": "REVIVIR",
@@ -39,8 +45,7 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Revivir"
             },
-            "Pocion de Vida",
-            {
+            "Pocion de Vida": {
                 "descripcion": "Cura una cantidad de vida actual especifica",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
@@ -49,54 +54,49 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Vida"
             },
-            "Arco Largo",
-            {
+            "Arco Largo": {
                 "descripcion": "Un gran arco que aumenta la potencia de tus flechas",
                 "precio": 300,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Arco Largo"
             },
-            "Maza de Bridas",
-            {
+            "Maza de Bridas": {
                 "descripcion": "Gran maza con puntas recurvada que te cura 20 por cada ataque",
                 "precio": 500,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Maza de Bridas"
             },
-            "Baculo de Toth",
-            {
+            "Baculo de Toth": {
                 "descripcion": "Un poderoso baculo capaz de destruir a sus enemigos",
                 "precio": 1000,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Baculo de Toth"
             }
-        ]}
+        }}
     },
     {
         "clases": "GUERRERO",
         "nombre": "Aaron",
-        "inventario": {"inventario": [
-            "Espada Larga",
-            {
+        "inventario": {"inventario": {
+            "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
                 "precio": 20,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 60,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Espada Larga"
             },
-            "Pocion de Revivir",
-            {
+            "Pocion de Revivir": {
                 "descripcion": "Una increible pocion que tiene la capacidad de traer del mundo de los muertos a su portador",
                 "precio": 600,
                 "tipo": "REVIVIR",
@@ -105,8 +105,7 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Revivir"
             },
-            "Pocion de Vida",
-            {
+            "Pocion de Vida": {
                 "descripcion": "Cura una cantidad de vida actual especifica",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
@@ -115,54 +114,49 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Vida"
             },
-            "Arco Largo",
-            {
+            "Arco Largo": {
                 "descripcion": "Un gran arco que aumenta la potencia de tus flechas",
                 "precio": 300,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Arco Largo"
             },
-            "Maza de Bridas",
-            {
+            "Maza de Bridas": {
                 "descripcion": "Gran maza con puntas recurvada que te cura 20 por cada ataque",
                 "precio": 500,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Maza de Bridas"
             },
-            "Baculo de Toth",
-            {
+            "Baculo de Toth": {
                 "descripcion": "Un poderoso baculo capaz de destruir a sus enemigos",
                 "precio": 1000,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Baculo de Toth"
             }
-        ]}
+        }}
     },
     {
         "clases": "MAGO",
         "nombre": "Jose",
-        "inventario": {"inventario": [
-            "Espada Larga",
-            {
+        "inventario": {"inventario": {
+            "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
                 "precio": 20,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 60,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Espada Larga"
             },
-            "Pocion de Revivir",
-            {
+            "Pocion de Revivir": {
                 "descripcion": "Una increible pocion que tiene la capacidad de traer del mundo de los muertos a su portador",
                 "precio": 600,
                 "tipo": "REVIVIR",
@@ -171,8 +165,7 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Revivir"
             },
-            "Pocion de Vida",
-            {
+            "Pocion de Vida": {
                 "descripcion": "Cura una cantidad de vida actual especifica",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
@@ -181,54 +174,49 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Vida"
             },
-            "Arco Largo",
-            {
+            "Arco Largo": {
                 "descripcion": "Un gran arco que aumenta la potencia de tus flechas",
                 "precio": 300,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Arco Largo"
             },
-            "Maza de Bridas",
-            {
+            "Maza de Bridas": {
                 "descripcion": "Gran maza con puntas recurvada que te cura 20 por cada ataque",
                 "precio": 500,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Maza de Bridas"
             },
-            "Baculo de Toth",
-            {
+            "Baculo de Toth": {
                 "descripcion": "Un poderoso baculo capaz de destruir a sus enemigos",
                 "precio": 1000,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Baculo de Toth"
             }
-        ]}
+        }}
     },
     {
         "clases": "ARQUERO",
         "nombre": "Juan",
-        "inventario": {"inventario": [
-            "Espada Larga",
-            {
+        "inventario": {"inventario": {
+            "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
                 "precio": 20,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 60,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Espada Larga"
             },
-            "Pocion de Revivir",
-            {
+            "Pocion de Revivir": {
                 "descripcion": "Una increible pocion que tiene la capacidad de traer del mundo de los muertos a su portador",
                 "precio": 600,
                 "tipo": "REVIVIR",
@@ -237,8 +225,7 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Revivir"
             },
-            "Pocion de Vida",
-            {
+            "Pocion de Vida": {
                 "descripcion": "Cura una cantidad de vida actual especifica",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
@@ -247,51 +234,46 @@
                 "cantidad": 1,
                 "nombre": "Pocion de Vida"
             },
-            "Arco Largo",
-            {
+            "Arco Largo": {
                 "descripcion": "Un gran arco que aumenta la potencia de tus flechas",
                 "precio": 300,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Arco Largo"
             },
-            "Maza de Bridas",
-            {
+            "Maza de Bridas": {
                 "descripcion": "Gran maza con puntas recurvada que te cura 20 por cada ataque",
                 "precio": 500,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Maza de Bridas"
             },
-            "Baculo de Toth",
-            {
+            "Baculo de Toth": {
                 "descripcion": "Un poderoso baculo capaz de destruir a sus enemigos",
                 "precio": 1000,
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Baculo de Toth"
             }
-        ]}
+        }}
     },
-    {"inventario": [
-        "Espada Larga",
-        {
+    {"inventario": {
+        "Espada Larga": {
             "descripcion": "Una gran mandoble que aumenta tu daño",
             "precio": 200,
             "tipo": "PUNTOSDEATAQUE",
             "esConsumible": false,
             "estadistica": 0,
-            "cantidad": 2,
+            "cantidad": 1,
             "nombre": "Espada Larga"
         },
-        "Pocion de Revivir",
-        {
+        "Pocion de Revivir": {
             "descripcion": "Una increible pocion que tiene la capacidad de traer del mundo de los muertos a su portador",
             "precio": 600,
             "tipo": "REVIVIR",
@@ -300,18 +282,16 @@
             "cantidad": 1,
             "nombre": "Pocion de Revivir"
         },
-        "Pocion de Vida",
-        {
+        "Pocion de Vida": {
             "descripcion": "Cura una cantidad de vida actual especifica",
             "precio": 10,
             "tipo": "PUNTOSDEVIDA",
             "esConsumible": true,
             "estadistica": 50,
-            "cantidad": 2,
+            "cantidad": 99,
             "nombre": "Pocion de Vida"
         },
-        "Arco Largo",
-        {
+        "Arco Largo": {
             "descripcion": "Un gran arco que aumenta la potencia de tus flechas",
             "precio": 300,
             "tipo": "PUNTOSDEATAQUE",
@@ -320,8 +300,7 @@
             "cantidad": 1,
             "nombre": "Arco Largo"
         },
-        "Maza de Bridas",
-        {
+        "Maza de Bridas": {
             "descripcion": "Gran maza con puntas recurvada que te cura 20 por cada ataque",
             "precio": 500,
             "tipo": "PUNTOSDEATAQUE",
@@ -330,8 +309,7 @@
             "cantidad": 1,
             "nombre": "Maza de Bridas"
         },
-        "Baculo de Toth",
-        {
+        "Baculo de Toth": {
             "descripcion": "Un poderoso baculo capaz de destruir a sus enemigos",
             "precio": 1000,
             "tipo": "PUNTOSDEATAQUE",
@@ -340,5 +318,5 @@
             "cantidad": 1,
             "nombre": "Baculo de Toth"
         }
-    ]}
+    }}
 ]
