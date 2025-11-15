@@ -103,5 +103,8 @@ public class Partida {
     public Inventario getInventarioTienda() {
         return inventarioTienda;
     }
+    public int recompensa(int nivel){
+        return 300*(1+nivel);
+    }
 }
 

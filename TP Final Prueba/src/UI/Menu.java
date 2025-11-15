@@ -1,17 +1,14 @@
-package Modelo;
+package UI;
 
 import Enumeradores.E_Clases;
 import Excepciones.NumeroNoValidoException;
 import Excepciones.TodosLosMiembrosMuertosException;
-import GestoraJson.GestorJson;
-import JsonUtiles.JsonUtiles;
-import org.json.JSONArray;
+import Modelo.Enemigo;
+import Modelo.Partida;
+import Modelo.PersonajeJugable;
 
-import java.nio.channels.ScatteringByteChannel;
 import java.util.InputMismatchException;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class Menu {
     //Coleccion donde guardamos las diferentes partidas
@@ -38,7 +35,8 @@ public class Menu {
                             Ingrese un numero para continuar:
                             1. Empezar pelea
                             2. Visitar la Plaza de los Gremios
-                            3. Salir
+                            3. Mostrar Party
+                            4. Salir
                             """);
                     try {
                         eleccion = sc.nextInt();
@@ -46,7 +44,7 @@ public class Menu {
                         if (eleccion < 0) {
                             throw new NumeroNoValidoException("Se ingreso un numero negativo");
                         }
-                        if (eleccion > 3) throw new NumeroNoValidoException("Se ingreso un numero no valido");
+                        if (eleccion > 4) throw new NumeroNoValidoException("Se ingreso un numero no valido");
                     } catch (InputMismatchException e) {
                             System.out.println("No se ingreso un numero, intentelo de nuevo");
                             eleccion = 0;
@@ -65,7 +63,11 @@ public class Menu {
                                 System.out.println("Felicitaciones a ganado el juego");
                                 winCon = true;
                                 continuar = false;
+                                break;
                             }
+                            int cantidadDeOroRecompensa= partida.recompensa(nivel);
+                            System.out.println("Por derrotar al jefe se le otorgara una recompensa de "+cantidadDeOroRecompensa+ " de oro");
+
                         } else {
                             throw new TodosLosMiembrosMuertosException("☠️ Han muerto todos los miembros de la party ☠️" +
                                     "GAME OVER");
@@ -141,7 +143,7 @@ public class Menu {
                                         } while (!seleccionValida);
                                         System.out.println(" °º¤ø,¸Bienvenido a La tienda del maestro Emma¸,ø¤º° ");
                                         System.out.println("( ͡° ͜ʖ ͡°) -> estabas buscando un ALQUIMISTA!?");
-                                        System.out.println(partida.inventarioTienda.mostrarInventarioAlquimia());
+                                        System.out.println(partida.getInventarioTienda().mostrarInventarioAlquimia());
                                         System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
                                         System.out.println("Ingrese el item que desea comprar: ");
                                         System.out.println("1. Pocion de Vida 2. Pocion de Revivir");
@@ -216,7 +218,7 @@ public class Menu {
                                         System.out.println(" +--[♦]==< Bienvenido a LA FORJA DE LOS NUEVE NICOS >==[♦]--+ ");
                                         System.out.println("( ͡° ͜ʖ ͡°) -> Tengo TODO seas un Mago, Arquero, Guerrero o Barbaro! Aqui esta lo que necesitas!");
                                         System.out.println("Asi que eres un " + partida.getParty().get(numeroDePj).getClases());
-                                        System.out.println(partida.inventarioTienda.mostrarInventarioArmeria(partida.getParty().get(numeroDePj)));
+                                        System.out.println(partida.getInventarioTienda().mostrarInventarioArmeria(partida.getParty().get(numeroDePj)));
                                         System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
                                         System.out.println("Desea comprar ese item?: ");
                                         System.out.println("1. Si | 2. No");
@@ -269,7 +271,7 @@ public class Menu {
                             }
                         } while (!seleccionValida);
                         System.out.println("+-💰💰💰---------------------------------------------+");
-                        partida.setDineroDisponible(partida.inventarioTienda.comprarItem(partida.getPersonajeJugable(nombre), nombreObjeto, partida.getDineroDisponible()));
+                        partida.setDineroDisponible(partida.getInventarioTienda().comprarItem(partida.getPersonajeJugable(nombre), nombreObjeto, partida.getDineroDisponible()));
                         System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
                         System.out.println("+-🎒🎒🎒---------------------------------------------+");
                         System.out.println("Inventario de: " + nombre);
@@ -293,6 +295,10 @@ public class Menu {
                     eleccion = 0;
                     break;
                 case 3:
+                    System.out.println(partida.mostrarParty());
+                    eleccion = 0;
+                    break;
+                case 4:
                     continuar = false;
                     break;
             }
@@ -307,6 +313,28 @@ public class Menu {
         while (partida.estadoParty() && partida.getEnemigos().get(nivel).isVivoOMuerto()) {
             switch (eleccionCombate) {
                 case 0:
+                    if (turno + 1 > partida.getParty().size()) {
+                        int eleccionEnemigo = 0;
+                        do {
+                            int numeroRandom = (int) (Math.random() * 101);
+
+                            if (numeroRandom < 25) {
+                                eleccionEnemigo = 0;
+                            } else if (numeroRandom < 50) {
+                                eleccionEnemigo = 1;
+                            } else if (numeroRandom < 75) {
+                                eleccionEnemigo = 2;
+                            } else if (numeroRandom < 100) {
+                                eleccionEnemigo = 3;
+                            }
+                        } while (!partida.getParty().get(eleccionEnemigo).isVivoOMuerto());
+                        int danoHecho = partida.getEnemigos().get(nivel).atacar(partida.getParty().get(eleccionEnemigo), nivel);
+                        System.out.println("+-----------------------⚔️---------------------------+");
+                        System.out.println(partida.getEnemigos().get(nivel).getNombre() + " ataco a " + partida.getParty().get(eleccionEnemigo).getNombre() + " por " + danoHecho + " de dano ☄️");
+                        System.out.println("+----------------------------------------------------+");
+                        System.out.println("La vida actual de " + partida.getParty().get(eleccionEnemigo).getNombre() + " es " + partida.getParty().get(eleccionEnemigo).getPuntosDeVidaActual() + " ❤️");
+                        turno = 0;
+                    }
                     System.out.println("+-👾👾👾------------------------------------------------+");
                     System.out.println(partida.vidaParty(nivel));
                     System.out.println("+--------------------------------------------------------+");
@@ -346,33 +374,8 @@ public class Menu {
 
                     }
                     turno++;
-                    if (turno + 1 > partida.getParty().size()) {
-                        int numeroRandom = (int) (Math.random() * 101);
-                        int eleccionEnemigo = 0;
-                        System.out.println(numeroRandom);
-                        if (numeroRandom < 25) {
-                            eleccionEnemigo = 0;
-                        } else if (numeroRandom < 50) {
-                            eleccionEnemigo = 1;
-                        } else if (numeroRandom < 75) {
-                            eleccionEnemigo = 2;
-                        } else if (numeroRandom < 100) {
-                            eleccionEnemigo = 3;
-                        }
-                        if (!partida.getParty().get(eleccionEnemigo).isVivoOMuerto()) {
-                            while (!partida.getParty().get(eleccionEnemigo).isVivoOMuerto()) {
-                                if (eleccionEnemigo > partida.getParty().size()) eleccionEnemigo++;
-                                else eleccionEnemigo--;
-                            }
+                    //eleccionTurnoEnemigo();
 
-                        }
-                        int danoHecho = partida.getEnemigos().get(nivel).atacar(partida.getParty().get(eleccionEnemigo), nivel);
-                        System.out.println("+-----------------------⚔️---------------------------+");
-                        System.out.println(partida.getEnemigos().get(nivel).getNombre() + " ataco a " + partida.getParty().get(eleccionEnemigo).getNombre() + " por " + danoHecho + " de dano ☄️");
-                        System.out.println("+----------------------------------------------------+");
-                        System.out.println("La vida actual de " + partida.getParty().get(eleccionEnemigo).getNombre() + " es " + partida.getParty().get(eleccionEnemigo).getPuntosDeVidaActual() + " ❤️");
-                        turno = 0;
-                    }
                     eleccionCombate = 0;
                     break;
                 case 2:
@@ -383,15 +386,15 @@ public class Menu {
                     try {
                         switch (sc.nextInt()) {
                             case 1:
-                                if (partida.getParty().get(turno).inventario.usarItem(partida.getParty().get(turno).inventario.inventario.get("Pocion de Vida"), partida.getParty().get(turno))) {
+                                if (partida.getParty().get(turno).getInventario().usarItem(partida.getParty().get(turno).getInventario().getInventario().get("Pocion de Vida"), partida.getParty().get(turno))) {
                                     turno++;
                                 } else {
                                     System.out.println();
                                 }
                                 break;
                             case 2:
-                                if (partida.getParty().get(turno).inventario.usarItem(partida.getParty().get(turno).inventario.inventario.get("Pocion de Revivir"), partida.getParty().get(turno))) {
-                                    turno++;
+                                if (partida.getParty().get(turno).getInventario().usarItem(partida.getParty().get(turno).getInventario().getInventario().get("Pocion de Revivir"), partida.getParty().get(turno))) {
+                                    turno++; //salta index out of bound cuando es el ultimo turno en el menu de combate
                                 } else {
                                     System.out.println("El personaje que se quiere revivir esta vivo");
                                 }
@@ -427,15 +430,17 @@ public class Menu {
         if (partida.getParty().get(nivel).getClases().equals(E_Clases.GUERRERO)) {
             partida.getParty().get(nivel).atacar(enemigo);
         } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.MAGO)) {
-            partida.getParty().get(0).setPuntosDeVidaActual(partida.getParty().get(0).getPuntosDeVidaActual() + 25);
-            partida.getParty().get(1).setPuntosDeVidaActual(partida.getParty().get(1).getPuntosDeVidaActual() + 25);
-            partida.getParty().get(2).setPuntosDeVidaActual(partida.getParty().get(2).getPuntosDeVidaActual() + 25);
-            partida.getParty().get(3).setPuntosDeVidaActual(partida.getParty().get(3).getPuntosDeVidaActual() + 25);
+            for (PersonajeJugable p:partida.getParty()) {
+                p.setPuntosDeVidaActual(25);
+            }
         } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.ARQUERO)) {
             partida.setDineroDisponible(partida.getDineroDisponible() + ((int) (25 * (1 + 0.25 * nivel))));
         } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.BARBARO)) {
 //inmortalidad por dos turnos
         }
+    }
+    public void eleccionTurnoEnemigo(){
+
     }
 
 }
