@@ -67,6 +67,10 @@ public class Partida {
         return estado;
     }
 
+    public String mostrarNombres(){
+        return "1-> " + getParty().get(0).getNombre() + " | 2->" + getParty().get(1).getNombre() + "| 3-> " + getParty().get(2).getNombre() + " | 4-> " + getParty().get(3).getNombre();
+    }
+
     public PersonajeJugable getPersonajeJugable(String nombre) {
         for (PersonajeJugable pj : party.getLista()) {
             if (pj.getNombre().equals(nombre)) {
@@ -74,6 +78,10 @@ public class Partida {
             }
         }
         return null;
+    }
+
+    public PersonajeJugable getPersonajeJugablePoscision(int posicion){
+        return party.getLista().get(posicion);
     }
 
     public int getDineroDisponible() {
