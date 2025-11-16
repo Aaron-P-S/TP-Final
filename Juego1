@@ -15,13 +15,13 @@
         "puntosDeVidaMaxima": 2000,
         "nivel": 2,
         "nombre": "Goblin Luchador",
-        "puntosDeVidaActual": 2000
+        "puntosDeVidaActual": 0
     },
     {
         "puntosDeVidaMaxima": 3000,
         "nivel": 3,
         "nombre": "Goblin Jefe",
-        "puntosDeVidaActual": 0
+        "puntosDeVidaActual": 3000
     },
     {
         "clases": "BARBARO",
@@ -319,6 +319,6 @@
             "nombre": "Baculo de Toth"
         }
     }},
-    {"dinero": 900},
-    {"nivelPartida": 3}
+    {"dinero": 600},
+    {"nivelPartida": 2}
 ]
