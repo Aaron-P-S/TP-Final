@@ -12,6 +12,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {
@@ -34,7 +35,6 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         boolean continuar = true;
         int eleccion = 0;
-        boolean winCon = false; //ponerlo en partida
         System.out.println("Ingrese 0 para iniciar una nueva partida, ingrese otro numero para cargar partida");
         int eleccionPartida;
         try {
@@ -49,7 +49,6 @@ public class Menu {
         } catch (PartidaGanadaException e) {
             System.out.println(e.getMessage());
             continuar = false;
-
         }
 
         while (continuar) {
@@ -86,7 +85,7 @@ public class Menu {
                             System.out.println("Felicidades, a ganado el combate numero " + (nivel + 1));
                             if (nivel + 1 == partida.getEnemigos().size()) {
                                 System.out.println("Felicitaciones a ganado el juego");
-                                winCon = true;
+                                partida.setWincon(true);
                                 continuar = false;
                                 break;
                             }
@@ -107,7 +106,7 @@ public class Menu {
                         }
                     } catch (TodosLosMiembrosMuertosException e) {
                         System.out.println(e.getMessage());
-                        eleccion = 3;
+                        eleccion = 4;
                         break;
                     }
                     eleccion = 0;
@@ -210,7 +209,7 @@ public class Menu {
                     System.out.println(partida.vidaParty(nivel));
                     System.out.println("+----------------------------------------------------+");
                     System.out.println("Ingrese un numero segun el item que quiera utilizar");
-                    System.out.println("1-> Pocion de vida " + "2-> Pocion de Resurreccion " + "3-> Pocion de dano");
+                    System.out.println("1-> Pocion de vida " + "2-> Pocion de Resurreccion ");
                     try {
                         switch (sc.nextInt()) {
                             case 1:
@@ -226,9 +225,6 @@ public class Menu {
                                 } else {
                                     System.out.println("El personaje que se quiere revivir esta vivo");
                                 }
-                                break;
-                            case 3:
-                                System.out.println("Trabajo en proceso");
                                 break;
                             default:
                                 throw new NumeroNoValidoException("⭕ Se escogio un numero no valido, intentelo de nuevo ⭕");
@@ -273,7 +269,7 @@ public class Menu {
     public boolean guardarPartida() {
         try {
             GestorJson gestorJson = new GestorJson();
-            JSONArray todosAJson = gestorJson.pasarDeArrayAJson(partida.getEnemigos(), partida.getParty(), partida.getInventarioTienda(), partida.getDineroDisponible(), getNivel());
+            JSONArray todosAJson = gestorJson.pasarDeArrayAJson(partida.getEnemigos(), partida.getParty(), partida.getInventarioTienda(), partida.getDineroDisponible(), getNivel(),partida.getWincon());
             JsonUtiles.grabarUnJson(todosAJson, "Juego1");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -292,21 +288,24 @@ public class Menu {
                 jsonArray = new JSONArray(JsonUtiles.leerUnJson("Juego1"));
             }
             GestorJson gestorJson = new GestorJson();
-            ArrayList<Enemigo> enemigosArray = gestorJson.pasarDeJsonAListaEnemigos(jsonArray);
-            ArrayList<PersonajeJugable> personajesArray = gestorJson.pasarDeJsonAParty(jsonArray);
-            GestorGenerico<PersonajeJugable> personajesGestorGenerico = new GestorGenerico<>();
-            for (int i = 0; i < personajesArray.size(); i++) {
-                personajesGestorGenerico.agregar(personajesArray.get(i));
-            }
-            GestorGenerico<Enemigo> enemigosGenerico = new GestorGenerico<>();
-            for (Enemigo e : enemigosArray) {
-                enemigosGenerico.agregar(e);
-            }
-            Inventario inventariotienda = gestorJson.pasarDeJsonAInventario(jsonArray);
-            int dinero = gestorJson.pasarDeJsonAdinero(jsonArray);
-            setNivel(gestorJson.pasarDeJsonAnivel(jsonArray));
-            this.partida = new Partida(personajesGestorGenerico, enemigosGenerico, inventariotienda, dinero);
-            return true;
+            if(!gestorJson.chequearWincon(jsonArray)) {
+                ArrayList<Enemigo> enemigosArray = gestorJson.pasarDeJsonAListaEnemigos(jsonArray);
+                ArrayList<PersonajeJugable> personajesArray = gestorJson.pasarDeJsonAParty(jsonArray);
+                GestorGenerico<PersonajeJugable> personajesGestorGenerico = new GestorGenerico<>();
+                for (int i = 0; i < personajesArray.size(); i++) {
+                    personajesGestorGenerico.agregar(personajesArray.get(i));
+                }
+                GestorGenerico<Enemigo> enemigosGenerico = new GestorGenerico<>();
+                for (Enemigo e : enemigosArray) {
+                    enemigosGenerico.agregar(e);
+                }
+                Inventario inventariotienda = gestorJson.pasarDeJsonAInventario(jsonArray);
+                int dinero = gestorJson.pasarDeJsonAdinero(jsonArray);
+                setNivel(gestorJson.pasarDeJsonAnivel(jsonArray));
+
+                this.partida = new Partida(personajesGestorGenerico, enemigosGenerico, inventariotienda, dinero);
+                return true;
+            }else throw new PartidaGanadaException("La partida a la que se quizo acceder ya esta ganada");
         } catch (JSONException e) {
             e.printStackTrace();
             return false;
@@ -318,11 +317,7 @@ public class Menu {
     }
 
     public void setNivel(int nivel) {
-        if (nivel < 4) {
-            this.nivel = nivel;
-        } else {
-            throw new PartidaGanadaException("La partida a la que se quizo acceder ya esta ganada");
-        }
+        this.nivel = nivel;
     }
 
     public void tienda() {
@@ -337,7 +332,7 @@ public class Menu {
             System.out.println("Bienvenido a la Plaza de los Gremios!");
             System.out.println("+----------------------------------------------------+");
             System.out.println("A que tienda quieres ir?");
-            System.out.println("1- ❤️‍🩹 La tienda del maestro Emma | 2- ⚔️ La Forja de los Nueve Nicos ");
+            System.out.println("1- ❤️‍🩹 La tienda del maestro Emma | 2- ⚔️ La Forja de los Nueve Nicos 3- Salir");
             do {
                 try {
                     switch (sc.nextInt()) {
@@ -376,6 +371,10 @@ public class Menu {
 
                             nombreObjeto = eleccionItemArmeria(numeroDePj);
                             break;
+                        case 3:
+                            seleccionValida=true;
+
+                            break;
                         default:
                             System.out.println("⭕ Se ingreso un numero no valido, intentelo de nuevo ⭕");
                             sc.nextLine();
@@ -390,7 +389,7 @@ public class Menu {
             } while (!seleccionValida);
             System.out.println("+-💰💰💰---------------------------------------------+");
             partida.setDineroDisponible(partida.getInventarioTienda().comprarItem(partida.getPersonajeJugablePoscision(numeroDePj), nombreObjeto, partida.getDineroDisponible()));
-            if(nombreObjeto == ""){
+            if(Objects.equals(nombreObjeto, "")){
                 System.out.println("Te vas sin comprar nada! :c");
             }
             System.out.println("DINERO DISPONIBLE = $$$ " + partida.getDineroDisponible());
@@ -411,7 +410,7 @@ public class Menu {
                     sc.nextLine();
                 }
 
-            } while (seleccionValida2 == false);
+            } while (!seleccionValida2);
         } while (flag == 1);
     }
 

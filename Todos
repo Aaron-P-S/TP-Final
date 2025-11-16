@@ -24,6 +24,19 @@
         "puntosDeVidaActual": 3000
     },
     {
+            "puntosDeVidaMaxima": 4000,
+            "nivel": 4,
+            "nombre": "Goblin Caudillo",
+            "puntosDeVidaActual": 4000
+    },
+    {
+            "puntosDeVidaMaxima": 5000,
+            "nivel": 5,
+            "nombre": "Rey Goblin",
+            "puntosDeVidaActual": 5000
+    },
+
+    {
         "clases": "BARBARO",
         "nombre": "Pedro",
         "inventario": {"inventario": {
@@ -320,5 +333,6 @@
         }
     }},
     {"dinero": 100},
-       {"nivelPartida": 0}
+    {"nivelPartida": 0},
+    {"winCon": false}
 ]
