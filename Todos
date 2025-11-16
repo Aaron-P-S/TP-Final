@@ -28,13 +28,43 @@
             "nivel": 4,
             "nombre": "Goblin Caudillo",
             "puntosDeVidaActual": 4000
-    },
+        },
     {
             "puntosDeVidaMaxima": 5000,
             "nivel": 5,
             "nombre": "Rey Goblin",
             "puntosDeVidaActual": 5000
-    },
+        },
+    {
+            "puntosDeVidaMaxima": 6000,
+            "nivel": 6,
+            "nombre": "Pequeño Dragon",
+            "puntosDeVidaActual": 6000
+        },
+    {
+                "puntosDeVidaMaxima": 8000,
+                "nivel": 7,
+                "nombre": "Dragon de Tierra",
+                "puntosDeVidaActual": 8000
+            },
+    {
+                "puntosDeVidaMaxima": 10000,
+                "nivel": 8,
+                "nombre": "Dragon de Agua",
+                "puntosDeVidaActual": 10000
+            },
+    {
+                "puntosDeVidaMaxima": 12000,
+                "nivel": 9,
+                "nombre": "Dragon de Fuego",
+                "puntosDeVidaActual": 12000
+            },
+    {
+                "puntosDeVidaMaxima": 15000,
+                "nivel": 10,
+                "nombre": "Pequeño Dragon",
+                "puntosDeVidaActual": 15000
+            },
 
     {
         "clases": "BARBARO",

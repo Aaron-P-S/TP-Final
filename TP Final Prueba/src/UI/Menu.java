@@ -21,6 +21,7 @@ public class Menu {
     //flag game over cuando se pierde la partida para no poder volver a continuar
     public Partida partida;
     public int nivel = 0;
+    private final Scanner sc = new Scanner(System.in);
 
     public Menu(Partida partida) {
         this.partida = partida;
@@ -32,29 +33,29 @@ public class Menu {
 
     //Metodos para ejecutar el juego
     public void menu() {
-        Scanner sc = new Scanner(System.in);
         boolean continuar = true;
         int eleccion = 0;
         boolean seleccionValida=false;
 
         int eleccionPartida;
-        while(!seleccionValida) {
+        while (!seleccionValida) {
             try {
-                System.out.println("Ingrese 0 para iniciar una nueva partida, ingrese otro numero para cargar partida");
                 eleccionPartida = sc.nextInt();
                 sc.nextLine();
                 cargarpartida(eleccionPartida);
-                seleccionValida=true;
-                continuar = true;
+                seleccionValida = true;
             } catch (InputMismatchException e) {
                 System.out.println("Ingrese un numero para cargar partida");
                 sc.nextLine();
-                continuar = false;
+
 
             } catch (PartidaGanadaException e) {
                 System.out.println(e.getMessage());
-                continuar = false;
+
             }
+        } catch (PartidaGanadaException e) {
+            System.out.println(e.getMessage());
+            continuar = false;
         }
 
         while (continuar) {
@@ -120,6 +121,7 @@ public class Menu {
                 case 2:
                     /// menu tienda
                     tienda();
+                    eleccion = 0;
                     break;
                 case 3:
                     System.out.println(partida.mostrarParty());
@@ -142,7 +144,6 @@ public class Menu {
     public boolean combate() {
         int eleccionCombate = 0;
         int turno = 0;
-        Scanner sc = new Scanner(System.in);
         while (partida.estadoParty() && partida.getEnemigos().get(nivel).isVivoOMuerto()) {
             switch (eleccionCombate) {
                 case 0:
