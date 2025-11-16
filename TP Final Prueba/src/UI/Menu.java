@@ -38,8 +38,10 @@ public class Menu {
         boolean seleccionValida=false;
 
         int eleccionPartida;
+
         while (!seleccionValida) {
             try {
+                System.out.println("Ingrese 0 para crear una nueva partida o cualquier numero para cargar la existente");
                 eleccionPartida = sc.nextInt();
                 sc.nextLine();
                 cargarpartida(eleccionPartida);
@@ -53,9 +55,6 @@ public class Menu {
                 System.out.println(e.getMessage());
 
             }
-        } catch (PartidaGanadaException e) {
-            System.out.println(e.getMessage());
-            continuar = false;
         }
 
         while (continuar) {
