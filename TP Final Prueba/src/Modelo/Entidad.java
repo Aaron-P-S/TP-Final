@@ -30,6 +30,9 @@ public abstract class Entidad {
             }
         } else puntosDeVidaActual = puntosDeVidaMaxima;
     }
+    public void setPuntosDeVidaActualAux(int puntosDeVida) {
+        this.puntosDeVidaActual = puntosDeVida;
+    }
 
     public String getNombre() {
         return nombre;
@@ -45,7 +48,9 @@ public abstract class Entidad {
 
     public void setPuntosDeVidaMaxima(int puntosDeVidaMaxima) {
         this.puntosDeVidaMaxima = puntosDeVidaMaxima;
-        setPuntosDeVidaActual(puntosDeVidaMaxima);
+        if(getPuntosDeVidaActual()==0&&isVivoOMuerto()) {
+            setPuntosDeVidaActual(puntosDeVidaMaxima);
+        }
     }
 
     public boolean isVivoOMuerto() {

@@ -18,7 +18,13 @@ public class PersonajeJugable extends Entidad implements Jsonable {
         this.inventario = new Inventario();
         setPuntosDeVidaMaxima(clase.getVidaBase());
     }
-
+    public PersonajeJugable(String nombre, E_Clases clase, int puntosDeVidaActual) {
+        super(nombre);
+        this.inventario = new Inventario();
+        this.clases= clase;
+        setPuntosDeVidaMaxima(clase.getVidaBase());
+        setPuntosDeVidaActualAux(puntosDeVidaActual);
+    }
     public E_Clases getClases() {
         return clases;
     }
@@ -108,8 +114,10 @@ public class PersonajeJugable extends Entidad implements Jsonable {
         JSONObject personajeJugableJson = new JSONObject();
         personajeJugableJson.put("nombre", getNombre());
         personajeJugableJson.put("clases", getClases());
+        personajeJugableJson.put("puntosDeVidaActual",getPuntosDeVidaActual());
         JSONObject inventarioJson = inventario.toJson();
         personajeJugableJson.put("inventario", inventarioJson);
+        personajeJugableJson.put("vivoOMuerto",isVivoOMuerto());
         return personajeJugableJson;
     }
 }
