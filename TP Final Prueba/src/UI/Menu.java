@@ -21,6 +21,7 @@ public class Menu {
     //flag game over cuando se pierde la partida para no poder volver a continuar
     public Partida partida;
     public int nivel = 0;
+    private final Scanner sc = new Scanner(System.in);
 
     public Menu(Partida partida) {
         this.partida = partida;
@@ -32,20 +33,25 @@ public class Menu {
 
     //Metodos para ejecutar el juego
     public void menu() {
-        Scanner sc = new Scanner(System.in);
         boolean continuar = true;
         int eleccion = 0;
         System.out.println("Ingrese 0 para iniciar una nueva partida, ingrese otro numero para cargar partida");
         int eleccionPartida;
-        try {
-            eleccionPartida = sc.nextInt();
-            sc.nextLine();
-            cargarpartida(eleccionPartida);
-        } catch (InputMismatchException e) {
-            System.out.println("Ingrese un numero para cargar partida");
-            sc.nextLine();
-            continuar = false;
+        while (!seleccionValida) {
+            try {
+                eleccionPartida = sc.nextInt();
+                sc.nextLine();
+                cargarpartida(eleccionPartida);
+                seleccionValida = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Ingrese un numero para cargar partida");
+                sc.nextLine();
 
+
+            } catch (PartidaGanadaException e) {
+                System.out.println(e.getMessage());
+
+            }
         } catch (PartidaGanadaException e) {
             System.out.println(e.getMessage());
             continuar = false;
@@ -114,6 +120,7 @@ public class Menu {
                 case 2:
                     /// menu tienda
                     tienda();
+                    eleccion = 0;
                     break;
                 case 3:
                     System.out.println(partida.mostrarParty());
@@ -136,7 +143,6 @@ public class Menu {
     public boolean combate() {
         int eleccionCombate = 0;
         int turno = 0;
-        Scanner sc = new Scanner(System.in);
         while (partida.estadoParty() && partida.getEnemigos().get(nivel).isVivoOMuerto()) {
             switch (eleccionCombate) {
                 case 0:
@@ -326,7 +332,6 @@ public class Menu {
         int numeroDePj = 0;
         boolean seleccionValida = false;
         boolean seleccionValida2 = false;
-        Scanner sc = new Scanner(System.in);
         do {
             System.out.println("+-🛍️🛍️🛍️------------------------------------------------+");
             System.out.println("Bienvenido a la Plaza de los Gremios!");
@@ -406,17 +411,16 @@ public class Menu {
                     seleccionValida2 = true;
                 } catch (InputMismatchException e) {
                     System.out.println("No se ingreso un numero, intentelo de nuevo");
+                    flag = 0;
                     seleccionValida2 = false;
                     sc.nextLine();
                 }
-
-            } while (!seleccionValida2);
+            } while (seleccionValida2 == false);
         } while (flag == 1);
     }
 
     public int eleccionPersonaje() {
         boolean seleccionValida;
-        Scanner sc = new Scanner(System.in);
         do {
             try {
                 switch (sc.nextInt()) {
@@ -431,6 +435,7 @@ public class Menu {
                     default:
                         System.out.println("Se ingreso un numero incorrecto, intentelo de nuevo");
                         seleccionValida = false;
+                        sc.nextLine();
                         break;
                 }
             } catch (java.util.InputMismatchException e) {
@@ -443,7 +448,6 @@ public class Menu {
     }
 
     public String eleccionItemAlquimia() {
-        Scanner sc = new Scanner(System.in);
         boolean seleccionValida;
 
         do {
@@ -472,7 +476,6 @@ public class Menu {
     }
 
     public String eleccionItemArmeria(int numeroDePj) {
-        Scanner sc = new Scanner(System.in);
         boolean seleccionValida = false;
         try {
             do {
