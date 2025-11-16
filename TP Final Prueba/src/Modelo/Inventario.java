@@ -120,6 +120,7 @@ public class Inventario implements Jsonable {
                             if (item.getCantidad() > 0) {
                                 personajeJugable.setVivoOMuerto(true);
                                 personajeJugable.setPuntosDeVidaActual(personajeJugable.getPuntosDeVidaMaxima());
+                                System.out.println(personajeJugable.getNombre()+" a revivido");
                                 return true;
 
                             } else throw new NoTieneElItemException("No tiene pociones de resurreccion restantes");

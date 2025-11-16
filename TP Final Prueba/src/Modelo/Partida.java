@@ -15,7 +15,7 @@ public class Partida {
     GestorGenerico<Enemigo> enemigos;
 
     private int dineroDisponible;
-
+    private boolean wincon;
     public Partida() {
         this.inventarioTienda = new Inventario();
         this.party = new GestorGenerico<>();
@@ -27,6 +27,7 @@ public class Partida {
         this.party = personajes;
         this.enemigos = enemigos;
         this.dineroDisponible = dineroDisponible;
+        this.wincon = false;
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable) {
@@ -122,6 +123,13 @@ public class Partida {
     public int recompensa(int nivel){
         setDineroDisponible(300*(1+nivel));
         return 300*(1+nivel);
+    }
+
+    public void setWincon(boolean wincon) {
+        this.wincon = wincon;
+    }
+    public boolean getWincon() {
+        return wincon;
     }
 }
 

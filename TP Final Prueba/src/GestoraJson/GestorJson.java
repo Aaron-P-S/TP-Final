@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GestorJson {
 
-    public JSONArray pasarDeArrayAJson(ArrayList<Enemigo> enemigos, ArrayList<PersonajeJugable> jugadores, Inventario inventario, int dinero, int nivel) {
+    public JSONArray pasarDeArrayAJson(ArrayList<Enemigo> enemigos, ArrayList<PersonajeJugable> jugadores, Inventario inventario, int dinero, int nivel,boolean wincon) {
         JSONArray jsonArrayTodos = new JSONArray();
         for (Enemigo enemigo : enemigos) {
             JSONObject enemigoJson = enemigo.toJson();
@@ -31,6 +31,9 @@ public class GestorJson {
         JSONObject nivelJson = new JSONObject();
         nivelJson.put("nivelPartida",nivel);
         jsonArrayTodos.put(nivelJson);
+        JSONObject winconjson = new JSONObject();
+        winconjson.put("wincon",wincon);
+        jsonArrayTodos.put(winconjson);
         return jsonArrayTodos;
     }
 
@@ -98,6 +101,14 @@ public class GestorJson {
             }
         }
         return nivel;
+    }
+    public boolean chequearWincon(JSONArray listatodos){
+        for (int i = 0; i < listatodos.length(); i++) {
+            if(listatodos.getJSONObject(i).has("winCon")){
+                return listatodos.getJSONObject(i).getBoolean("winCon");
+            }
+        }
+        return false;
     }
     }
 
