@@ -318,5 +318,7 @@
             "cantidad": 1,
             "nombre": "Baculo de Toth"
         }
-    }}
+    }},
+    {"dinero": 100},
+       {"nivelPartida": 0}
 ]
