@@ -1,5 +1,7 @@
 package Modelo;
 
+import GestoraJson.GestorJson;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,6 +21,12 @@ public class Partida {
         this.party = new GestorGenerico<>();
         this.enemigos = new GestorGenerico<>();
         this.dineroDisponible = 20000;
+    }
+    public Partida(GestorGenerico<PersonajeJugable> personajes, GestorGenerico<Enemigo> enemigos, Inventario inventarioTienda, int dineroDisponible) {
+        this.inventarioTienda = inventarioTienda;
+        this.party = personajes;
+        this.enemigos = enemigos;
+        this.dineroDisponible = dineroDisponible;
     }
 
     public boolean agregarPersonajeJugable(PersonajeJugable personajeJugable) {
@@ -104,6 +112,7 @@ public class Partida {
         return inventarioTienda;
     }
     public int recompensa(int nivel){
+        setDineroDisponible(300*(1+nivel));
         return 300*(1+nivel);
     }
 }

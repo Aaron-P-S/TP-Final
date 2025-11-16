@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GestorJson {
 
-    public JSONArray pasarDeArrayAJson(ArrayList<Enemigo> enemigos, ArrayList<PersonajeJugable> jugadores, Inventario inventario) {
+    public JSONArray pasarDeArrayAJson(ArrayList<Enemigo> enemigos, ArrayList<PersonajeJugable> jugadores, Inventario inventario, int dinero, int nivel) {
         JSONArray jsonArrayTodos = new JSONArray();
         for (Enemigo enemigo : enemigos) {
             JSONObject enemigoJson = enemigo.toJson();
@@ -25,6 +25,12 @@ public class GestorJson {
         }
         JSONObject inventarioJson = inventario.toJson();
         jsonArrayTodos.put(inventarioJson);
+        JSONObject dineroJson = new JSONObject();
+        dineroJson.put("dinero",dinero);
+        jsonArrayTodos.put(dineroJson);
+        JSONObject nivelJson = new JSONObject();
+        nivelJson.put("nivelPartida",nivel);
+        jsonArrayTodos.put(nivelJson);
         return jsonArrayTodos;
     }
 
@@ -44,6 +50,8 @@ public class GestorJson {
         for (int i = 0; i < listaTodos.length(); i++) {
             if (listaTodos.getJSONObject(i).has("clases")) {
                 PersonajeJugable personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"), (E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases"))));
+                Inventario inventarioPj=pasarDeJsonAInventario(listaTodos.getJSONObject(i).getJSONObject("inventario"));
+                personajeJugable.agregarInventario(inventarioPj);
                 jugadores.add(personajeJugable);
             }
         }
@@ -71,6 +79,25 @@ public class GestorJson {
             }
         }
         return new Inventario(); // vacío si no se encontró
+    }
+
+    public int pasarDeJsonAdinero(JSONArray listatodos){
+        int dinero=0;
+        for (int i = 0; i < listatodos.length(); i++) {
+            if(listatodos.getJSONObject(i).has("dinero")){
+                dinero=listatodos.getJSONObject(i).getInt("dinero");
+            }
+        }
+        return dinero;
+    }
+    public int pasarDeJsonAnivel(JSONArray listatodos){
+        int nivel=0;
+        for (int i = 0; i < listatodos.length(); i++) {
+            if(listatodos.getJSONObject(i).has("nivelPartida")){
+                nivel=listatodos.getJSONObject(i).getInt("nivelPartida");
+            }
+        }
+        return nivel;
     }
     }
 

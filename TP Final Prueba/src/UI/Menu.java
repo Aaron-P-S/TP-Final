@@ -2,11 +2,15 @@ package UI;
 
 import Enumeradores.E_Clases;
 import Excepciones.NumeroNoValidoException;
+import Excepciones.PartidaGanadaException;
 import Excepciones.TodosLosMiembrosMuertosException;
-import Modelo.Enemigo;
-import Modelo.Partida;
-import Modelo.PersonajeJugable;
+import GestoraJson.GestorJson;
+import JsonUtiles.JsonUtiles;
+import Modelo.*;
+import org.json.JSONArray;
+import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -21,12 +25,33 @@ public class Menu {
         this.partida = partida;
     }
 
+    public Menu() {
+
+    }
+
     //Metodos para ejecutar el juego
     public void menu() {
         Scanner sc = new Scanner(System.in);
         boolean continuar = true;
         int eleccion = 0;
-        boolean winCon = false;
+        boolean winCon = false; //ponerlo en partida
+        System.out.println("Ingrese 0 para iniciar una nueva partida, ingrese otro numero para cargar partida");
+        int eleccionPartida;
+        try {
+            eleccionPartida = sc.nextInt();
+            sc.nextLine();
+            cargarpartida(eleccionPartida);
+        } catch (InputMismatchException e) {
+            System.out.println("Ingrese un numero para cargar partida");
+            sc.nextLine();
+            continuar = false;
+
+        }catch(PartidaGanadaException e){
+            System.out.println(e.getMessage());
+            continuar = false;
+
+        }
+
         while (continuar) {
             switch (eleccion) {
                 case 0:
@@ -46,8 +71,8 @@ public class Menu {
                         }
                         if (eleccion > 4) throw new NumeroNoValidoException("Se ingreso un numero no valido");
                     } catch (InputMismatchException e) {
-                            System.out.println("No se ingreso un numero, intentelo de nuevo");
-                            eleccion = 0;
+                        System.out.println("No se ingreso un numero, intentelo de nuevo");
+                        eleccion = 0;
                         sc.nextLine();
                     } catch (NumeroNoValidoException e) {
                         System.out.println(e.getMessage());
@@ -65,8 +90,8 @@ public class Menu {
                                 continuar = false;
                                 break;
                             }
-                            int cantidadDeOroRecompensa= partida.recompensa(nivel);
-                            System.out.println("Por derrotar al jefe se le otorgara una recompensa de "+cantidadDeOroRecompensa+ " de oro");
+                            int cantidadDeOroRecompensa = partida.recompensa(nivel);
+                            System.out.println("Por derrotar al jefe se le otorgara una recompensa de " + cantidadDeOroRecompensa + " de oro");
 
                         } else {
                             throw new TodosLosMiembrosMuertosException("☠️ Han muerto todos los miembros de la party ☠️" +
@@ -299,6 +324,12 @@ public class Menu {
                     eleccion = 0;
                     break;
                 case 4:
+                    System.out.println("Guardando y saliendo de la partida");
+                    if (guardarPartida()) {
+                        System.out.println("La partida se a guardado exitosamente");
+                    } else {
+                        System.out.println("Hubo un problema al guardar la partida");
+                    }
                     continuar = false;
                     break;
             }
@@ -420,9 +451,7 @@ public class Menu {
                     throw new NumeroNoValidoException("No se ingreso un numero valido");
             }
         }
-//        GestorJson gestorJson = new GestorJson();
-//        JSONArray todos=gestorJson.pasarDeArrayAJson(partida.enemigos,partida.getParty(),partida.getInventarioTienda());
-//        JsonUtiles.grabarUnJson(todos,"Juego1");
+        guardarPartida();
         return partida.estadoParty();
     }
 
@@ -430,7 +459,7 @@ public class Menu {
         if (partida.getParty().get(nivel).getClases().equals(E_Clases.GUERRERO)) {
             partida.getParty().get(nivel).atacar(enemigo);
         } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.MAGO)) {
-            for (PersonajeJugable p:partida.getParty()) {
+            for (PersonajeJugable p : partida.getParty()) {
                 p.setPuntosDeVidaActual(25);
             }
         } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.ARQUERO)) {
@@ -439,9 +468,62 @@ public class Menu {
 //inmortalidad por dos turnos
         }
     }
-    public void eleccionTurnoEnemigo(){
+
+    public void eleccionTurnoEnemigo() {
 
     }
 
+    public boolean guardarPartida() {
+        try {
+            GestorJson gestorJson = new GestorJson();
+            JSONArray todosAJson = gestorJson.pasarDeArrayAJson(partida.getEnemigos(), partida.getParty(), partida.getInventarioTienda(), partida.getDineroDisponible(),getNivel());
+            JsonUtiles.grabarUnJson(todosAJson, "Juego1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+    }
+
+    public boolean cargarpartida(int eleccion) {
+        try {
+            JSONArray jsonArray = null;
+            if (eleccion == 0) {
+                jsonArray = new JSONArray(JsonUtiles.leerUnJson("Todos"));
+            } else {
+                jsonArray = new JSONArray(JsonUtiles.leerUnJson("Juego1"));
+            }
+            GestorJson gestorJson = new GestorJson();
+            ArrayList<Enemigo> enemigosArray = gestorJson.pasarDeJsonAListaEnemigos(jsonArray);
+            ArrayList<PersonajeJugable> personajesArray = gestorJson.pasarDeJsonAParty(jsonArray);
+            GestorGenerico<PersonajeJugable> personajesGestorGenerico = new GestorGenerico<>();
+            for (int i = 0; i < personajesArray.size(); i++) {
+                personajesGestorGenerico.agregar(personajesArray.get(i));
+            }
+            GestorGenerico<Enemigo> enemigosGenerico = new GestorGenerico<>();
+            for (Enemigo e : enemigosArray) {
+                enemigosGenerico.agregar(e);
+            }
+            Inventario inventariotienda = gestorJson.pasarDeJsonAInventario(jsonArray);
+            int dinero = gestorJson.pasarDeJsonAdinero(jsonArray);
+            setNivel(gestorJson.pasarDeJsonAnivel(jsonArray));
+            this.partida = new Partida(personajesGestorGenerico, enemigosGenerico, inventariotienda, dinero);
+            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        if(nivel<4) {
+            this.nivel = nivel;
+        }else {throw new PartidaGanadaException("La partida a la que se quizo acceder ya esta ganada");}
+    }
 }
 
