@@ -363,5 +363,6 @@
         }
     }},
     {"dinero": 100},
-       {"nivelPartida": 0}
+    {"nivelPartida": 0},
+    {"winCon": false}
 ]
