@@ -3,13 +3,13 @@
         "puntosDeVidaMaxima": 500,
         "nivel": 0,
         "nombre": "Pequeño Goblin",
-        "puntosDeVidaActual": 500
+        "puntosDeVidaActual": 0
     },
     {
         "puntosDeVidaMaxima": 1000,
         "nivel": 1,
         "nombre": "Goblin",
-        "puntosDeVidaActual": 1000
+        "puntosDeVidaActual": 0
     },
     {
         "puntosDeVidaMaxima": 2000,
@@ -21,7 +21,49 @@
         "puntosDeVidaMaxima": 3000,
         "nivel": 3,
         "nombre": "Goblin Jefe",
-        "puntosDeVidaActual": 3000
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 4000,
+        "nivel": 4,
+        "nombre": "Goblin Caudillo",
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 5000,
+        "nivel": 5,
+        "nombre": "Rey Goblin",
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 6000,
+        "nivel": 6,
+        "nombre": "Pequeño Dragon",
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 8000,
+        "nivel": 7,
+        "nombre": "Dragon de Tierra",
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 10000,
+        "nivel": 8,
+        "nombre": "Dragon de Agua",
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 12000,
+        "nivel": 9,
+        "nombre": "Dragon de Fuego",
+        "puntosDeVidaActual": 0
+    },
+    {
+        "puntosDeVidaMaxima": 15000,
+        "nivel": 10,
+        "nombre": "Pequeño Dragon",
+        "puntosDeVidaActual": 0
     },
     {
         "clases": "BARBARO",
@@ -51,7 +93,7 @@
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
                 "estadistica": 50,
-                "cantidad": 1,
+                "cantidad": 8,
                 "nombre": "Pocion de Vida"
             },
             "Arco Largo": {
@@ -69,7 +111,7 @@
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 0,
+                "cantidad": 1,
                 "nombre": "Maza de Bridas"
             },
             "Baculo de Toth": {
@@ -93,7 +135,7 @@
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 60,
-                "cantidad": 0,
+                "cantidad": 1,
                 "nombre": "Espada Larga"
             },
             "Pocion de Revivir": {
@@ -111,7 +153,7 @@
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
                 "estadistica": 50,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Pocion de Vida"
             },
             "Arco Largo": {
@@ -171,7 +213,7 @@
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
                 "estadistica": 50,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Pocion de Vida"
             },
             "Arco Largo": {
@@ -198,7 +240,7 @@
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 0,
+                "cantidad": 1,
                 "nombre": "Baculo de Toth"
             }
         }}
@@ -222,7 +264,7 @@
                 "tipo": "REVIVIR",
                 "esConsumible": true,
                 "estadistica": 0,
-                "cantidad": 1,
+                "cantidad": 2,
                 "nombre": "Pocion de Revivir"
             },
             "Pocion de Vida": {
@@ -231,7 +273,7 @@
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
                 "estadistica": 50,
-                "cantidad": 1,
+                "cantidad": 0,
                 "nombre": "Pocion de Vida"
             },
             "Arco Largo": {
@@ -240,7 +282,7 @@
                 "tipo": "PUNTOSDEATAQUE",
                 "esConsumible": false,
                 "estadistica": 0,
-                "cantidad": 0,
+                "cantidad": 1,
                 "nombre": "Arco Largo"
             },
             "Maza de Bridas": {
@@ -270,7 +312,7 @@
             "tipo": "PUNTOSDEATAQUE",
             "esConsumible": false,
             "estadistica": 0,
-            "cantidad": 1,
+            "cantidad": 0,
             "nombre": "Espada Larga"
         },
         "Pocion de Revivir": {
@@ -279,7 +321,7 @@
             "tipo": "REVIVIR",
             "esConsumible": true,
             "estadistica": 0,
-            "cantidad": 1,
+            "cantidad": 0,
             "nombre": "Pocion de Revivir"
         },
         "Pocion de Vida": {
@@ -288,7 +330,7 @@
             "tipo": "PUNTOSDEVIDA",
             "esConsumible": true,
             "estadistica": 50,
-            "cantidad": 99,
+            "cantidad": 87,
             "nombre": "Pocion de Vida"
         },
         "Arco Largo": {
@@ -297,7 +339,7 @@
             "tipo": "PUNTOSDEATAQUE",
             "esConsumible": false,
             "estadistica": 0,
-            "cantidad": 1,
+            "cantidad": 0,
             "nombre": "Arco Largo"
         },
         "Maza de Bridas": {
@@ -306,7 +348,7 @@
             "tipo": "PUNTOSDEATAQUE",
             "esConsumible": false,
             "estadistica": 0,
-            "cantidad": 1,
+            "cantidad": 0,
             "nombre": "Maza de Bridas"
         },
         "Baculo de Toth": {
@@ -315,10 +357,10 @@
             "tipo": "PUNTOSDEATAQUE",
             "esConsumible": false,
             "estadistica": 0,
-            "cantidad": 1,
+            "cantidad": 0,
             "nombre": "Baculo de Toth"
         }
     }},
-    {"dinero": 600},
-    {"nivelPartida": 2}
+    {"dinero": 3000},
+    {"nivelPartida": 10}
 ]
