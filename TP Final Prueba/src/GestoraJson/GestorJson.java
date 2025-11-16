@@ -62,7 +62,7 @@ public class GestorJson {
                     if (listaTodos.getJSONObject(i).getBoolean("vivoOMuerto")) {
                         personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"), (E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases"))));
                     }else{
-                        personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"),E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases")));
+                        personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"),E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases")),listaTodos.getJSONObject(i).getBoolean("vivoOMuerto"));
                     }
                 }
                 Inventario inventarioPj = pasarDeJsonAInventario(listaTodos.getJSONObject(i).getJSONObject("inventario"));

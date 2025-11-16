@@ -25,6 +25,14 @@ public class PersonajeJugable extends Entidad implements Jsonable {
         setPuntosDeVidaMaxima(clase.getVidaBase());
         setPuntosDeVidaActualAux(puntosDeVidaActual);
     }
+    public PersonajeJugable(String nombre, E_Clases clase, boolean vivoOMuerto) {
+        super(nombre);
+        this.clases = clase;
+        this.inventario = new Inventario();
+        setPuntosDeVidaMaxima(clase.getVidaBase());
+        setPuntosDeVidaActualAux(0);
+        setVivoOMuerto(false);
+    }
     public E_Clases getClases() {
         return clases;
     }
