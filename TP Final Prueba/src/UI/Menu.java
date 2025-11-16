@@ -260,24 +260,6 @@ public class Menu {
         return partida.estadoParty();
     }
 
-    public void usarHabilidad(Enemigo enemigo) {
-        if (partida.getParty().get(nivel).getClases().equals(E_Clases.GUERRERO)) {
-            partida.getParty().get(nivel).atacar(enemigo);
-        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.MAGO)) {
-            for (PersonajeJugable p : partida.getParty()) {
-                p.setPuntosDeVidaActual(25);
-            }
-        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.ARQUERO)) {
-            partida.setDineroDisponible(partida.getDineroDisponible() + ((int) (25 * (1 + 0.25 * nivel))));
-        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.BARBARO)) {
-//inmortalidad por dos turnos
-        }
-    }
-
-    public void eleccionTurnoEnemigo() {
-
-    }
-
     public boolean guardarPartida() {
         try {
             GestorJson gestorJson = new GestorJson();
