@@ -3,13 +3,13 @@
         "puntosDeVidaMaxima": 500,
         "nivel": 0,
         "nombre": "Pequeño Goblin",
-        "puntosDeVidaActual": 500
+        "puntosDeVidaActual": 0
     },
     {
         "puntosDeVidaMaxima": 1000,
         "nivel": 1,
         "nombre": "Goblin",
-        "puntosDeVidaActual": 1000
+        "puntosDeVidaActual": 0
     },
     {
         "puntosDeVidaMaxima": 2000,
@@ -21,7 +21,19 @@
         "puntosDeVidaMaxima": 3000,
         "nivel": 3,
         "nombre": "Goblin Jefe",
-        "puntosDeVidaActual": 3000
+        "puntosDeVidaActual": 25
+    },
+    {
+        "puntosDeVidaMaxima": 4000,
+        "nivel": 4,
+        "nombre": "Goblin Caudillo",
+        "puntosDeVidaActual": 4000
+    },
+    {
+        "puntosDeVidaMaxima": 5000,
+        "nivel": 5,
+        "nombre": "Rey Goblin",
+        "puntosDeVidaActual": 5000
     },
     {
         "clases": "BARBARO",
@@ -319,6 +331,7 @@
             "nombre": "Baculo de Toth"
         }
     }},
-    {"dinero": 600},
-    {"nivelPartida": 2}
+    {"dinero": 900},
+    {"nivelPartida": 3},
+    {"wincon": false}
 ]

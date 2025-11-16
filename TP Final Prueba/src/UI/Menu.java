@@ -35,20 +35,26 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         boolean continuar = true;
         int eleccion = 0;
-        System.out.println("Ingrese 0 para iniciar una nueva partida, ingrese otro numero para cargar partida");
-        int eleccionPartida;
-        try {
-            eleccionPartida = sc.nextInt();
-            sc.nextLine();
-            cargarpartida(eleccionPartida);
-        } catch (InputMismatchException e) {
-            System.out.println("Ingrese un numero para cargar partida");
-            sc.nextLine();
-            continuar = false;
+        boolean seleccionValida=false;
 
-        } catch (PartidaGanadaException e) {
-            System.out.println(e.getMessage());
-            continuar = false;
+        int eleccionPartida;
+        while(!seleccionValida) {
+            try {
+                System.out.println("Ingrese 0 para iniciar una nueva partida, ingrese otro numero para cargar partida");
+                eleccionPartida = sc.nextInt();
+                sc.nextLine();
+                cargarpartida(eleccionPartida);
+                seleccionValida=true;
+                continuar = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Ingrese un numero para cargar partida");
+                sc.nextLine();
+                continuar = false;
+
+            } catch (PartidaGanadaException e) {
+                System.out.println(e.getMessage());
+                continuar = false;
+            }
         }
 
         while (continuar) {
