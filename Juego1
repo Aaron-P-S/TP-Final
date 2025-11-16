@@ -15,13 +15,13 @@
         "puntosDeVidaMaxima": 2000,
         "nivel": 2,
         "nombre": "Goblin Luchador",
-        "puntosDeVidaActual": 0
+        "puntosDeVidaActual": 2000
     },
     {
         "puntosDeVidaMaxima": 3000,
         "nivel": 3,
         "nombre": "Goblin Jefe",
-        "puntosDeVidaActual": 25
+        "puntosDeVidaActual": 3000
     },
     {
         "puntosDeVidaMaxima": 4000,
@@ -34,6 +34,36 @@
         "nivel": 5,
         "nombre": "Rey Goblin",
         "puntosDeVidaActual": 5000
+    },
+    {
+        "puntosDeVidaMaxima": 6000,
+        "nivel": 6,
+        "nombre": "Pequeño Dragon",
+        "puntosDeVidaActual": 6000
+    },
+    {
+        "puntosDeVidaMaxima": 8000,
+        "nivel": 7,
+        "nombre": "Dragon de Tierra",
+        "puntosDeVidaActual": 8000
+    },
+    {
+        "puntosDeVidaMaxima": 10000,
+        "nivel": 8,
+        "nombre": "Dragon de Agua",
+        "puntosDeVidaActual": 10000
+    },
+    {
+        "puntosDeVidaMaxima": 12000,
+        "nivel": 9,
+        "nombre": "Dragon de Fuego",
+        "puntosDeVidaActual": 12000
+    },
+    {
+        "puntosDeVidaMaxima": 15000,
+        "nivel": 10,
+        "nombre": "Pequeño Dragon",
+        "puntosDeVidaActual": 15000
     },
     {
         "clases": "BARBARO",
@@ -63,7 +93,7 @@
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
                 "estadistica": 50,
-                "cantidad": 1,
+                "cantidad": 2,
                 "nombre": "Pocion de Vida"
             },
             "Arco Largo": {
@@ -300,7 +330,7 @@
             "tipo": "PUNTOSDEVIDA",
             "esConsumible": true,
             "estadistica": 50,
-            "cantidad": 99,
+            "cantidad": 98,
             "nombre": "Pocion de Vida"
         },
         "Arco Largo": {
@@ -331,7 +361,7 @@
             "nombre": "Baculo de Toth"
         }
     }},
-    {"dinero": 900},
-    {"nivelPartida": 3},
+    {"dinero": 590},
+    {"nivelPartida": 2},
     {"wincon": false}
 ]
