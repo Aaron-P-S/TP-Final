@@ -69,6 +69,8 @@
     {
         "clases": "BARBARO",
         "nombre": "Pedro",
+        "puntosDeVidaActual": 0,
+        "vivoOMuerto": true,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -129,6 +131,8 @@
     {
         "clases": "GUERRERO",
         "nombre": "Aaron",
+        "puntosDeVidaActual": 0,
+        "vivoOMuerto": true,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -189,6 +193,8 @@
     {
         "clases": "MAGO",
         "nombre": "Jose",
+        "puntosDeVidaActual": 0,
+        "vivoOMuerto": true,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -249,6 +255,8 @@
     {
         "clases": "ARQUERO",
         "nombre": "Juan",
+        "puntosDeVidaActual": 0,
+        "vivoOMuerto": true;
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -364,5 +372,6 @@
     }},
     {"dinero": 100},
     {"nivelPartida": 0},
-    {"winCon": false}
+    {"winCon": false},
+    {"partidaPerdida": false}
 ]

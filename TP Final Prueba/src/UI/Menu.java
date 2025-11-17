@@ -3,6 +3,7 @@ package UI;
 import Enumeradores.E_Clases;
 import Excepciones.NumeroNoValidoException;
 import Excepciones.PartidaGanadaException;
+import Excepciones.PartidaPerdidaException;
 import Excepciones.TodosLosMiembrosMuertosException;
 import GestoraJson.GestorJson;
 import JsonUtiles.JsonUtiles;
@@ -18,7 +19,6 @@ import java.util.Scanner;
 public class Menu {
     //Coleccion donde guardamos las diferentes partidas
     //cambiar a private
-    //flag game over cuando se pierde la partida para no poder volver a continuar
     public Partida partida;
     public int nivel = 0;
     private final Scanner sc = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class Menu {
                 sc.nextLine();
 
 
-            } catch (PartidaGanadaException e) {
+            } catch (PartidaGanadaException | PartidaPerdidaException e) {
                 System.out.println(e.getMessage());
 
             }
@@ -112,6 +112,7 @@ public class Menu {
                         }
                     } catch (TodosLosMiembrosMuertosException e) {
                         System.out.println(e.getMessage());
+                        partida.setPartidaPerdida(true);
                         eleccion = 4;
                         break;
                     }
@@ -121,6 +122,11 @@ public class Menu {
                     /// menu tienda
                     tienda();
                     eleccion = 0;
+                    if (guardarPartida()) {
+                        System.out.println("La partida se a guardado exitosamente");
+                    } else {
+                        System.out.println("Hubo un problema al guardar la partida");
+                    }
                     break;
                 case 3:
                     System.out.println(partida.mostrarParty());
@@ -254,28 +260,10 @@ public class Menu {
         return partida.estadoParty();
     }
 
-    public void usarHabilidad(Enemigo enemigo) {
-        if (partida.getParty().get(nivel).getClases().equals(E_Clases.GUERRERO)) {
-            partida.getParty().get(nivel).atacar(enemigo);
-        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.MAGO)) {
-            for (PersonajeJugable p : partida.getParty()) {
-                p.setPuntosDeVidaActual(25);
-            }
-        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.ARQUERO)) {
-            partida.setDineroDisponible(partida.getDineroDisponible() + ((int) (25 * (1 + 0.25 * nivel))));
-        } else if (partida.getParty().get(nivel).getClases().equals(E_Clases.BARBARO)) {
-//inmortalidad por dos turnos
-        }
-    }
-
-    public void eleccionTurnoEnemigo() {
-
-    }
-
     public boolean guardarPartida() {
         try {
             GestorJson gestorJson = new GestorJson();
-            JSONArray todosAJson = gestorJson.pasarDeArrayAJson(partida.getEnemigos(), partida.getParty(), partida.getInventarioTienda(), partida.getDineroDisponible(), getNivel(),partida.getWincon());
+            JSONArray todosAJson = gestorJson.pasarDeArrayAJson(partida.getEnemigos(), partida.getParty(), partida.getInventarioTienda(), partida.getDineroDisponible(), getNivel(),partida.getWincon(),partida.isPartidaPerdida());
             JsonUtiles.grabarUnJson(todosAJson, "Juego1");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -287,14 +275,14 @@ public class Menu {
 
     public boolean cargarpartida(int eleccion) {
         try {
-            JSONArray jsonArray = null;
+            JSONArray jsonArray;
             if (eleccion == 0) {
                 jsonArray = new JSONArray(JsonUtiles.leerUnJson("Todos"));
             } else {
                 jsonArray = new JSONArray(JsonUtiles.leerUnJson("Juego1"));
             }
             GestorJson gestorJson = new GestorJson();
-            if(!gestorJson.chequearWincon(jsonArray)) {
+            if(!gestorJson.chequearWincon(jsonArray)&&!gestorJson.chequearPartidaPerdida(jsonArray)) {
                 ArrayList<Enemigo> enemigosArray = gestorJson.pasarDeJsonAListaEnemigos(jsonArray);
                 ArrayList<PersonajeJugable> personajesArray = gestorJson.pasarDeJsonAParty(jsonArray);
                 GestorGenerico<PersonajeJugable> personajesGestorGenerico = new GestorGenerico<>();
@@ -311,8 +299,15 @@ public class Menu {
 
                 this.partida = new Partida(personajesGestorGenerico, enemigosGenerico, inventariotienda, dinero);
                 return true;
-            }else throw new PartidaGanadaException("La partida a la que se quizo acceder ya esta ganada");
-        } catch (JSONException e) {
+            }else{
+                if(gestorJson.chequearWincon(jsonArray)) {
+                    throw new PartidaGanadaException("La partida a la que se quizo acceder ya esta ganada");
+
+                }else {
+                    throw new PartidaPerdidaException("La partida a la que se quizo acceder esta perdida");
+                }
+            }
+                } catch (JSONException e) {
             e.printStackTrace();
             return false;
         }

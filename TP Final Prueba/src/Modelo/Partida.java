@@ -7,15 +7,15 @@ import java.util.HashMap;
 
 public class Partida {
     // clase para guardar los datos de las distintas partidas
-
     // INVENTARIO TIENDA
     Inventario inventarioTienda;
     //GENERICOS
     GestorGenerico<PersonajeJugable> party;
     GestorGenerico<Enemigo> enemigos;
-
     private int dineroDisponible;
     private boolean wincon;
+    private boolean partidaPerdida;
+
     public Partida() {
         this.inventarioTienda = new Inventario();
         this.party = new GestorGenerico<>();
@@ -130,6 +130,14 @@ public class Partida {
     }
     public boolean getWincon() {
         return wincon;
+    }
+
+    public boolean isPartidaPerdida() {
+        return partidaPerdida;
+    }
+
+    public void setPartidaPerdida(boolean partidaPerdida) {
+        this.partidaPerdida = partidaPerdida;
     }
 }
 

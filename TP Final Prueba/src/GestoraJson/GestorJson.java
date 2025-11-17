@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GestorJson {
 
-    public JSONArray pasarDeArrayAJson(ArrayList<Enemigo> enemigos, ArrayList<PersonajeJugable> jugadores, Inventario inventario, int dinero, int nivel,boolean wincon) {
+    public JSONArray pasarDeArrayAJson(ArrayList<Enemigo> enemigos, ArrayList<PersonajeJugable> jugadores, Inventario inventario, int dinero, int nivel, boolean wincon, boolean partidaPerdida) {
         JSONArray jsonArrayTodos = new JSONArray();
         for (Enemigo enemigo : enemigos) {
             JSONObject enemigoJson = enemigo.toJson();
@@ -26,14 +26,17 @@ public class GestorJson {
         JSONObject inventarioJson = inventario.toJson();
         jsonArrayTodos.put(inventarioJson);
         JSONObject dineroJson = new JSONObject();
-        dineroJson.put("dinero",dinero);
+        dineroJson.put("dinero", dinero);
         jsonArrayTodos.put(dineroJson);
         JSONObject nivelJson = new JSONObject();
-        nivelJson.put("nivelPartida",nivel);
+        nivelJson.put("nivelPartida", nivel);
         jsonArrayTodos.put(nivelJson);
         JSONObject winconjson = new JSONObject();
-        winconjson.put("wincon",wincon);
+        winconjson.put("wincon", wincon);
         jsonArrayTodos.put(winconjson);
+        JSONObject partidaPerdidajson = new JSONObject();
+        partidaPerdidajson.put("partidaPerdida", partidaPerdida);
+        jsonArrayTodos.put(partidaPerdidajson);
         return jsonArrayTodos;
     }
 
@@ -52,8 +55,17 @@ public class GestorJson {
         ArrayList<PersonajeJugable> jugadores = new ArrayList<>();
         for (int i = 0; i < listaTodos.length(); i++) {
             if (listaTodos.getJSONObject(i).has("clases")) {
-                PersonajeJugable personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"), (E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases"))));
-                Inventario inventarioPj=pasarDeJsonAInventario(listaTodos.getJSONObject(i).getJSONObject("inventario"));
+                PersonajeJugable personajeJugable;
+                if (listaTodos.getJSONObject(i).getInt("puntosDeVidaActual") != 0) {
+                    personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"), (E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases"))), listaTodos.getJSONObject(i).getInt("puntosDeVidaActual"));
+                } else {
+                    if (listaTodos.getJSONObject(i).getBoolean("vivoOMuerto")) {
+                        personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"), (E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases"))));
+                    }else{
+                        personajeJugable = new PersonajeJugable(listaTodos.getJSONObject(i).getString("nombre"),E_Clases.valueOf(listaTodos.getJSONObject(i).getString("clases")),listaTodos.getJSONObject(i).getBoolean("vivoOMuerto"));
+                    }
+                }
+                Inventario inventarioPj = pasarDeJsonAInventario(listaTodos.getJSONObject(i).getJSONObject("inventario"));
                 personajeJugable.agregarInventario(inventarioPj);
                 jugadores.add(personajeJugable);
             }
@@ -68,47 +80,60 @@ public class GestorJson {
 
         for (String key : contenido.keySet()) {
             JSONObject itemJson = contenido.getJSONObject(key);
-            Item item = new Item(itemJson.getString("nombre"),itemJson.getString("descripcion"),itemJson.getDouble("precio"),itemJson.getInt("cantidad"),itemJson.getBoolean("esConsumible"),itemJson.getInt("estadistica"),E_TipoItem.valueOf(itemJson.getString("tipo")));
+            Item item = new Item(itemJson.getString("nombre"), itemJson.getString("descripcion"), itemJson.getDouble("precio"), itemJson.getInt("cantidad"), itemJson.getBoolean("esConsumible"), itemJson.getInt("estadistica"), E_TipoItem.valueOf(itemJson.getString("tipo")));
             inv.agregarItem(key, item);
         }
 
         return inv;
     }
+
     public Inventario pasarDeJsonAInventario(JSONArray listaTodos) {
         for (int i = 0; i < listaTodos.length(); i++) {
             JSONObject obj = listaTodos.getJSONObject(i);
-            if (obj.has("inventario")&&!obj.has("nombre")) {
+            if (obj.has("inventario") && !obj.has("nombre")) {
                 return pasarDeJsonAInventario(obj); // llama al método existente
             }
         }
         return new Inventario(); // vacío si no se encontró
     }
 
-    public int pasarDeJsonAdinero(JSONArray listatodos){
-        int dinero=0;
+    public int pasarDeJsonAdinero(JSONArray listatodos) {
+        int dinero = 0;
         for (int i = 0; i < listatodos.length(); i++) {
-            if(listatodos.getJSONObject(i).has("dinero")){
-                dinero=listatodos.getJSONObject(i).getInt("dinero");
+            if (listatodos.getJSONObject(i).has("dinero")) {
+                dinero = listatodos.getJSONObject(i).getInt("dinero");
             }
         }
         return dinero;
     }
-    public int pasarDeJsonAnivel(JSONArray listatodos){
-        int nivel=0;
+
+    public int pasarDeJsonAnivel(JSONArray listatodos) {
+        int nivel = 0;
         for (int i = 0; i < listatodos.length(); i++) {
-            if(listatodos.getJSONObject(i).has("nivelPartida")){
-                nivel=listatodos.getJSONObject(i).getInt("nivelPartida");
+            if (listatodos.getJSONObject(i).has("nivelPartida")) {
+                nivel = listatodos.getJSONObject(i).getInt("nivelPartida");
             }
         }
         return nivel;
     }
-    public boolean chequearWincon(JSONArray listatodos){
+
+    public boolean chequearWincon(JSONArray listatodos) {
         for (int i = 0; i < listatodos.length(); i++) {
-            if(listatodos.getJSONObject(i).has("winCon")){
+            if (listatodos.getJSONObject(i).has("winCon")) {
                 return listatodos.getJSONObject(i).getBoolean("winCon");
             }
         }
         return false;
     }
+
+    public boolean chequearPartidaPerdida(JSONArray listatodos) {
+        for (int i = 0; i < listatodos.length(); i++) {
+            if (listatodos.getJSONObject(i).has("partidaPerdida")) {
+                return listatodos.getJSONObject(i).getBoolean("partidaPerdida");
+            }
+        }
+        return false;
     }
+
+}
 
