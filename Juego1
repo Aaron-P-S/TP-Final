@@ -9,7 +9,7 @@
         "puntosDeVidaMaxima": 1000,
         "nivel": 1,
         "nombre": "Goblin",
-        "puntosDeVidaActual": 0
+        "puntosDeVidaActual": 1000
     },
     {
         "puntosDeVidaMaxima": 2000,
@@ -67,7 +67,9 @@
     },
     {
         "clases": "BARBARO",
+        "vivoOMuerto": true,
         "nombre": "Pedro",
+        "puntosDeVidaActual": 200,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -88,12 +90,12 @@
                 "nombre": "Pocion de Revivir"
             },
             "Pocion de Vida": {
-                "descripcion": "Cura una cantidad de vida actual especifica",
+                "descripcion": "Cura toda tu vida",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
                 "estadistica": 50,
-                "cantidad": 2,
+                "cantidad": 1,
                 "nombre": "Pocion de Vida"
             },
             "Arco Largo": {
@@ -127,7 +129,9 @@
     },
     {
         "clases": "GUERRERO",
+        "vivoOMuerto": true,
         "nombre": "Aaron",
+        "puntosDeVidaActual": 100,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -148,7 +152,7 @@
                 "nombre": "Pocion de Revivir"
             },
             "Pocion de Vida": {
-                "descripcion": "Cura una cantidad de vida actual especifica",
+                "descripcion": "Cura toda tu vida",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
@@ -187,7 +191,9 @@
     },
     {
         "clases": "MAGO",
+        "vivoOMuerto": true,
         "nombre": "Jose",
+        "puntosDeVidaActual": 75,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -208,7 +214,7 @@
                 "nombre": "Pocion de Revivir"
             },
             "Pocion de Vida": {
-                "descripcion": "Cura una cantidad de vida actual especifica",
+                "descripcion": "Cura toda tu vida",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
@@ -247,7 +253,9 @@
     },
     {
         "clases": "ARQUERO",
+        "vivoOMuerto": true,
         "nombre": "Juan",
+        "puntosDeVidaActual": 100,
         "inventario": {"inventario": {
             "Espada Larga": {
                 "descripcion": "Una gran mandoble que aumenta tu daño",
@@ -268,7 +276,7 @@
                 "nombre": "Pocion de Revivir"
             },
             "Pocion de Vida": {
-                "descripcion": "Cura una cantidad de vida actual especifica",
+                "descripcion": "Cura toda tu vida",
                 "precio": 10,
                 "tipo": "PUNTOSDEVIDA",
                 "esConsumible": true,
@@ -325,12 +333,12 @@
             "nombre": "Pocion de Revivir"
         },
         "Pocion de Vida": {
-            "descripcion": "Cura una cantidad de vida actual especifica",
+            "descripcion": "Cura toda tu vida",
             "precio": 10,
             "tipo": "PUNTOSDEVIDA",
             "esConsumible": true,
             "estadistica": 50,
-            "cantidad": 98,
+            "cantidad": 99,
             "nombre": "Pocion de Vida"
         },
         "Arco Largo": {
@@ -361,7 +369,8 @@
             "nombre": "Baculo de Toth"
         }
     }},
-    {"dinero": 590},
-    {"nivelPartida": 2},
-    {"wincon": false}
+    {"dinero": 300},
+    {"nivelPartida": 1},
+    {"wincon": false},
+    {"partidaPerdida": false}
 ]
